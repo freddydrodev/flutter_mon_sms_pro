@@ -33,9 +33,15 @@ class OtpApi {
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    if (r.data['error'] != null) {
+      print(r.data['error']);
+
+      return null;
+    }
 
     final data = r.data['data'];
+
+    print(data);
 
     return OTPModel.fromJson(data);
   }
@@ -52,7 +58,11 @@ class OtpApi {
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    if (r.data['error'] != null) {
+      print(r.data['error']);
+
+      return null;
+    }
 
     final data = r.data['data'];
 

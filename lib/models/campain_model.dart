@@ -53,7 +53,8 @@ class CampainModel {
     return CampainModel(
       id: json['id'],
       name: json['name'],
-      type: json['type'], // == 'SMS' ? SMSType.sms : SMSType.flash,
+      type: SMSType.values.firstWhere((e) =>
+          e.value == json['type']), // == 'SMS' ? SMSType.sms : SMSType.flash,
       coords: json['coords'] != null ? Coords.fromJson(json['coords']) : null,
       contactList: json['contactList'],
       contactCount: json['contactCount'],
@@ -66,7 +67,7 @@ class CampainModel {
     return {
       'id': id,
       'name': name,
-      'type': type, // == SMSType.sms ? 'SMS' : 'FLASH',
+      'type': type.value, // == SMSType.sms ? 'SMS' : 'FLASH',
       'coords': coords?.toJson(),
       'contactList': contactList,
       'contactCount': contactCount,

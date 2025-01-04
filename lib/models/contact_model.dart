@@ -1,10 +1,12 @@
+import 'package:mon_sms_pro/utils.dart';
+
 class ContactModel {
   final String phone;
   final String? id;
   final String? name;
   final String? firstName;
   final String? lastName;
-  final String? sex; // M | F
+  final SexType? sex; // M | F
 
   ContactModel({
     required this.phone,
@@ -22,7 +24,7 @@ class ContactModel {
       name: json['name'],
       firstName: json['firstName'],
       lastName: json['lastName'],
-      sex: json['sex'],
+      sex: SexType.values.firstWhere((e) => e.value == json['sex']),
     );
   }
 
@@ -33,7 +35,7 @@ class ContactModel {
       'name': name,
       'firstName': firstName,
       'lastName': lastName,
-      'sex': sex,
+      'sex': sex?.value,
     };
   }
 }

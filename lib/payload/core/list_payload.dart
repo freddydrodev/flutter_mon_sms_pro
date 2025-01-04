@@ -26,7 +26,7 @@ class ListPayload extends BasePayload {
       apiKey: json['apiKey'],
       count: json['count'],
       page: json['page'],
-      sort: json["sort"],
+      sort: SortList.values.firstWhere((e) => e.value == json["sort"]),
       // json['sort'] == 'desc' ? SortList.desc : SortList.asc,
     );
   }
@@ -37,7 +37,7 @@ class ListPayload extends BasePayload {
       'apiKey': apiKey,
       'count': count,
       'page': page,
-      'sort': sort,
+      'sort': sort?.value,
       //sort == SortList.desc ? 'desc' : 'asc',
     };
   }

@@ -28,8 +28,12 @@ class CampainListPayload extends ListPayload {
       apiKey: json['apiKey'],
       count: json['count'],
       page: json['page'],
-      sort: json['sort'], // == 'desc' ? SortList.desc : SortList.asc,
-      orderBy: json['orderBy'], // == 'type' ? OrderBy.type : OrderBy.createdAt,
+      sort: SortList.values.firstWhere(
+        (e) => e.value == json['sort'],
+      ), // == 'desc' ? SortList.desc : SortList.asc,
+      orderBy: OrderBy.values.firstWhere((e) =>
+          e.value ==
+          json['orderBy']), // == 'type' ? OrderBy.type : OrderBy.createdAt,
     );
   }
 
@@ -39,8 +43,8 @@ class CampainListPayload extends ListPayload {
       'apiKey': apiKey,
       'count': count,
       'page': page,
-      'sort': sort, // == SortList.desc ? 'desc' : 'asc',
-      'orderBy': orderBy, // == OrderBy.type ? 'type' : 'createdAt',
+      'sort': sort?.value, // == SortList.desc ? 'desc' : 'asc',
+      'orderBy': orderBy?.value, // == OrderBy.type ? 'type' : 'createdAt',
     };
   }
 }
@@ -80,7 +84,8 @@ class CreateCampainPayload extends BasePayload {
       groupsIds: json['groupsIds'] ?? [],
       text: json['text'],
       senderId: json['senderId'],
-      type: json['type'], // == 'SMS' ? SMSType.sms : SMSType.flash,
+      type: SMSType.values.firstWhere((e) =>
+          e.value == json['type']), // == 'SMS' ? SMSType.sms : SMSType.flash,
       forceSenderId: json['forceSenderId'] ?? false,
     );
   }
@@ -96,8 +101,8 @@ class CreateCampainPayload extends BasePayload {
       'groupsIds': groupsIds,
       'text': text,
       'senderId': senderId,
-      'type': type, // == SMSType.sms ? 'SMS' : 'FLASH',
-      'forceSenderId': forceSenderId ?? 0,
+      'type': type?.value, // == SMSType.sms ? 'SMS' : 'FLASH',
+      'forceSenderId': forceSenderId ?? false,
     };
   }
 }

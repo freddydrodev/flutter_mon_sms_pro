@@ -23,7 +23,7 @@ class OTPModel {
     return OTPModel(
       token: json['token'],
       phoneNumber: json['phoneNumber'],
-      status: json['status'],
+      status: OTPStatus.values.firstWhere((e) => e.value == json['status']),
     );
   }
 
@@ -31,7 +31,7 @@ class OTPModel {
     return {
       'token': token,
       'phoneNumber': phoneNumber,
-      'status': status,
+      'status': status.value,
     };
   }
 }
