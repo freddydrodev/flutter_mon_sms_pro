@@ -41,8 +41,6 @@ class OtpApi {
 
     final data = r.data['data'];
 
-    print(data);
-
     return OTPModel.fromJson(data);
   }
 

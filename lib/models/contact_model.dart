@@ -7,6 +7,7 @@ class ContactModel {
   final String? firstName;
   final String? lastName;
   final SexType? sex; // M | F
+  final List<String> groupIds;
 
   ContactModel({
     required this.phone,
@@ -15,6 +16,7 @@ class ContactModel {
     this.firstName,
     this.lastName,
     this.sex,
+    this.groupIds = const [],
   });
 
   factory ContactModel.fromJson(Map<String, dynamic> json) {
@@ -24,7 +26,10 @@ class ContactModel {
       name: json['name'],
       firstName: json['firstName'],
       lastName: json['lastName'],
-      sex: SexType.values.firstWhere((e) => e.value == json['sex']),
+      sex: json['sex'] != null
+          ? SexType.values.firstWhere((e) => e.value == json['sex'])
+          : null,
+      groupIds: List<String>.from(json['groupIds']),
     );
   }
 
@@ -36,6 +41,7 @@ class ContactModel {
       'firstName': firstName,
       'lastName': lastName,
       'sex': sex?.value,
+      'groupIds': groupIds
     };
   }
 }

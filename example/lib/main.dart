@@ -91,7 +91,23 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: const Text("VERIFY OTP"),
             ),
-          ]
+          ],
+          ElevatedButton(
+            onPressed: () async {
+              final list = await sms.campain.list();
+
+              print(list);
+            },
+            child: const Text("CAMPAINS LIST"),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              final list = await sms.contact.list();
+
+              print(list);
+            },
+            child: const Text("CONTACT LIST"),
+          ),
         ],
       ),
     );
