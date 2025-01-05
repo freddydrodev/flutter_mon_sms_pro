@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:mon_sms_pro/apis/campain_api.dart';
 import 'package:mon_sms_pro/apis/contact_api.dart';
 import 'package:mon_sms_pro/apis/otp_api.dart';
+import 'package:mon_sms_pro/apis/sender_api.dart';
 
 export 'package:mon_sms_pro/payload/payload.dart';
 
@@ -30,6 +31,12 @@ class MonSMSPRO {
       );
 
   ContactApi get contact => ContactApi(
+        baseUrl: _baseUrl,
+        dio: _dio,
+        apiKey: _apiKey,
+      );
+
+  SenderApi get sender => SenderApi(
         baseUrl: _baseUrl,
         dio: _dio,
         apiKey: _apiKey,
