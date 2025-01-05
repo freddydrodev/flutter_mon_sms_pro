@@ -1,39 +1,77 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# mon_sms_pro
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+## Install the mon_sms_pro package from pub.dev:
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
-
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```bash
+flutter pub add mon_sms_pro
 ```
 
-## Additional information
+## Getting Started
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+For security reason it is useful to install the [`dotenv` package](https://pub.dev/packages/dotenv).
+
+```bash
+flutter pub add dotenv
+```
+
+After the installation, you need to create a `.env` file in the root of your Flutter project.
+
+```bash
+touch .env
+```
+
+Add the following lines to the `.env` file:
+
+```bash
+API_KEY="your_api_key"
+```
+
+import the environment variables:
+
+```dart
+import 'package:dotenv/dotenv.dart';
+
+void main() async {
+  await dotenv.load(fileName: ".env");
+  runApp(const MyApp());
+}
+```
+
+Create an instance of the MonSmsPro class:
+
+```dart
+final sms = MonSMSPRO(apiKey: dotenv.env['API_KEY'] ?? "");
+```
+
+Use the methods to send SMS:
+
+```dart
+import 'package:mon_sms_pro/mon_sms_pro.dart';
+
+// GET OTP
+ElevatedButton(
+    onPressed: () async {
+        final otp = await sms.otp.get(
+            GetOtpPayload(phoneNumber: "+2250000000000"),
+        );
+
+        if (otp != null) {
+            setState(() {
+                _token = otp.token;
+            });
+        }
+    },
+    child: const Text("GET OTP"),
+)
+```
+
+## Available methods
+
+| Method       | Description                                              |
+| ------------ | -------------------------------------------------------- |
+| `otp.get`    | Generates an OTP and sends it to the user's phone number |
+| `otp.verify` | Verifies a sent OTP                                      |
+
+## License
+
+The mon_sms_pro package is released under the [MIT License](https://opensource.org/licenses/MIT).

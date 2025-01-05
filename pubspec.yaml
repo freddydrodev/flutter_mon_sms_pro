@@ -1,7 +1,14 @@
 name: mon_sms_pro
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+description: "Send SMS using the monsms.pro API"
+version: 0.0.2
+homepage: https://github.com/freddydrodev/flutter_mon_sms_pro
+
+repository:
+  type: git
+  url: https://github.com/freddydrodev/flutter_mon_sms_pro
+
+issue_tracker:
+  url: https://github.com/freddydrodev/flutter_mon_sms_pro/issues
 
 environment:
   sdk: ^3.5.4
