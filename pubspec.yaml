@@ -2,9 +2,7 @@ name: mon_sms_pro
 description: "Send SMS using the monsms.pro API"
 version: 0.0.2
 homepage: https://github.com/freddydrodev/flutter_mon_sms_pro
-
 repository: https://github.com/freddydrodev/flutter_mon_sms_pro
-
 issue_tracker: https://github.com/freddydrodev/flutter_mon_sms_pro/issues
 
 environment:
@@ -15,11 +13,14 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^5.7.0
+  hive: ^2.2.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.13
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -3,17 +3,18 @@ import 'package:mon_sms_pro/payload/core/base_payload.dart';
 import 'package:mon_sms_pro/payload/core/list_payload.dart';
 import 'package:mon_sms_pro/utils.dart';
 
-enum OrderBy {
+enum CampainOrderBy {
   type("type"),
   createdAt("createdAt");
 
   final String value;
 
-  const OrderBy(this.value);
+  const CampainOrderBy(this.value);
 }
 
 class CampainListPayload extends ListPayload {
-  final OrderBy? orderBy;
+  final CampainOrderBy? orderBy;
+  final String senderId;
 
   CampainListPayload({
     super.apiKey,
@@ -21,30 +22,34 @@ class CampainListPayload extends ListPayload {
     super.page,
     super.sort,
     this.orderBy,
+    required this.senderId,
   });
 
   factory CampainListPayload.fromJson(Map<String, dynamic> json) {
     return CampainListPayload(
+      senderId: json['senderId'],
       apiKey: json['apiKey'],
       count: json['count'],
       page: json['page'],
       sort: SortList.values.firstWhere(
         (e) => e.value == json['sort'],
       ), // == 'desc' ? SortList.desc : SortList.asc,
-      orderBy: OrderBy.values.firstWhere((e) =>
-          e.value ==
-          json['orderBy']), // == 'type' ? OrderBy.type : OrderBy.createdAt,
+      orderBy: CampainOrderBy.values.firstWhere(
+        (e) => e.value == json['orderBy'],
+      ), // == 'type' ? CampainOrderBy.type : CampainOrderBy.createdAt,
     );
   }
 
   @override
   Map<String, dynamic> toJson() {
     return {
+      'senderId': senderId,
       'apiKey': apiKey,
       'count': count,
       'page': page,
       'sort': sort?.value, // == SortList.desc ? 'desc' : 'asc',
-      'orderBy': orderBy?.value, // == OrderBy.type ? 'type' : 'createdAt',
+      'orderBy':
+          orderBy?.value, // == CampainOrderBy.type ? 'type' : 'createdAt',
     };
   }
 }

@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mon_sms_pro/mon_sms_pro.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+
+  await initHiveAdapters();
+
+  await Hive.openBox('SMS_EXAMPLE');
+
   runApp(const MyApp());
 }
 
@@ -39,6 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
   final sms = MonSMSPRO(apiKey: dotenv.env['SMS_API_KEY'] ?? "");
 
   final _otpController = TextEditingController(text: "");
+
+  final box = Hive.box('SMS_EXAMPLE');
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +106,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           ElevatedButton(
             onPressed: () async {
-              final list = await sms.campain.list();
+              final list = await sms.campain.list(
+                CampainListPayload(senderId: "ID GOES HERE"),
+              );
+
+              box.put("CAMPAINS", list);
 
               print(list);
             },

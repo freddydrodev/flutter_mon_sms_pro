@@ -3,7 +3,7 @@ import 'package:mon_sms_pro/payload/core/base_payload.dart';
 import 'package:mon_sms_pro/payload/core/list_payload.dart';
 import 'package:mon_sms_pro/utils.dart';
 
-enum OrderBy {
+enum ContactOrderBy {
   type("type"),
   createdAt("createdAt"),
   firstName("firstName"),
@@ -14,11 +14,11 @@ enum OrderBy {
 
   final String value;
 
-  const OrderBy(this.value);
+  const ContactOrderBy(this.value);
 }
 
 class ContactListPayload extends ListPayload {
-  final OrderBy? orderBy;
+  final ContactOrderBy? orderBy;
 
   ContactListPayload({
     super.apiKey,
@@ -36,9 +36,10 @@ class ContactListPayload extends ListPayload {
       sort: SortList.values.firstWhere(
         (e) => e.value == json['sort'],
       ), // == 'desc' ? SortList.desc : SortList.asc,
-      orderBy: OrderBy.values.firstWhere((e) =>
+      orderBy: ContactOrderBy.values.firstWhere((e) =>
           e.value ==
-          json['orderBy']), // == 'type' ? OrderBy.type : OrderBy.createdAt,
+          json[
+              'orderBy']), // == 'type' ? ContactOrderBy.type : ContactOrderBy.createdAt,
     );
   }
 
@@ -49,7 +50,8 @@ class ContactListPayload extends ListPayload {
       'count': count,
       'page': page,
       'sort': sort?.value, // == SortList.desc ? 'desc' : 'asc',
-      'orderBy': orderBy?.value, // == OrderBy.type ? 'type' : 'createdAt',
+      'orderBy':
+          orderBy?.value, // == ContactOrderBy.type ? 'type' : 'createdAt',
     };
   }
 }

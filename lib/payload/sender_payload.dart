@@ -1,17 +1,17 @@
 import 'package:mon_sms_pro/payload/core/base_payload.dart';
 import 'package:mon_sms_pro/payload/core/list_payload.dart';
 
-enum OrderBy {
+enum SenderOrderBy {
   createdAt("createdAt"),
   name("name");
 
   final String value;
 
-  const OrderBy(this.value);
+  const SenderOrderBy(this.value);
 }
 
 class SenderListPayload extends ListPayload {
-  final OrderBy? orderBy;
+  final SenderOrderBy? orderBy;
 
   SenderListPayload({
     super.apiKey,
@@ -29,9 +29,10 @@ class SenderListPayload extends ListPayload {
       sort: SortList.values.firstWhere(
         (e) => e.value == json['sort'],
       ), // == 'desc' ? SortList.desc : SortList.asc,
-      orderBy: OrderBy.values.firstWhere((e) =>
+      orderBy: SenderOrderBy.values.firstWhere((e) =>
           e.value ==
-          json['orderBy']), // == 'type' ? OrderBy.type : OrderBy.createdAt,
+          json[
+              'orderBy']), // == 'type' ? SenderOrderBy.type : SenderOrderBy.createdAt,
     );
   }
 
@@ -42,7 +43,8 @@ class SenderListPayload extends ListPayload {
       'count': count,
       'page': page,
       'sort': sort?.value, // == SortList.desc ? 'desc' : 'asc',
-      'orderBy': orderBy?.value, // == OrderBy.type ? 'type' : 'createdAt',
+      'orderBy':
+          orderBy?.value, // == SenderOrderBy.type ? 'type' : 'createdAt',
     };
   }
 }

@@ -1,12 +1,23 @@
+import 'package:hive/hive.dart';
 import 'package:mon_sms_pro/utils.dart';
 
+part 'contact_model.g.dart';
+
+@HiveType(typeId: 2)
 class ContactModel {
+  @HiveField(0)
   final String phone;
+  @HiveField(1)
   final String? id;
+  @HiveField(2)
   final String? name;
+  @HiveField(3)
   final String? firstName;
+  @HiveField(4)
   final String? lastName;
+  @HiveField(5)
   final SexType? sex; // M | F
+  @HiveField(6)
   final List<String> groupIds;
 
   ContactModel({

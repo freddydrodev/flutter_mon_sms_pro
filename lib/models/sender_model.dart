@@ -1,7 +1,16 @@
+import 'package:hive/hive.dart';
+
+part 'sender_model.g.dart';
+
+@HiveType(typeId: 5)
 enum SenderStatus {
+  @HiveField(0)
   pending("PENDING"),
+  @HiveField(1)
   submited("SUBMITED"),
+  @HiveField(2)
   accepted("ACCEPTED"),
+  @HiveField(3)
   refused("REFUSED");
 
   final String value;
@@ -9,13 +18,21 @@ enum SenderStatus {
   const SenderStatus(this.value);
 }
 
+@HiveType(typeId: 6)
 class SenderModel {
+  @HiveField(0)
   final String? id;
+  @HiveField(1)
   final String name;
+  @HiveField(2)
   final String description;
+  @HiveField(3)
   final SenderStatus status;
+  @HiveField(4)
   final bool archived;
+  @HiveField(5)
   final DateTime createdAt;
+  @HiveField(6)
   final String userId;
 
   SenderModel({

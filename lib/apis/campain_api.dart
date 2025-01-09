@@ -25,11 +25,11 @@ class CampainApi {
   ///
   /// [payload] contains optional parameters for filtering the list.
   /// Returns a list of `CampainModel` instances.
-  Future<List<CampainModel>> list([CampainListPayload? payload]) async {
-    final url = "$_baseUrl/campain/list";
+  Future<List<CampainModel>> list(CampainListPayload payload) async {
+    final url = "$_baseUrl/sender/${payload.senderId}/campain";
 
     final r = await _dio.post(url, data: {
-      if (payload != null) ...payload.toJson(),
+      ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
