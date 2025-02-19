@@ -1,77 +1,24 @@
-# mon_sms_pro
+# Mon SMS PRO (Dart Library)
 
-## Install the mon_sms_pro package from pub.dev:
+## Introduction
 
-```bash
-flutter pub add mon_sms_pro
-```
+My SMS PRO est une application mobile permettant d'envoyer des SMS PRO en masse.
+Bien que basée en Côte d’Ivoire, la plateforme permet d’envoyer des SMS partout dans le monde.
+Il s'agit de la documentation dédiée aux développeurs souhaitant envoyer des SMS PRO ou POP UP Flash via une application tierce.
 
-## Getting Started
+## Bibliothèques & Restful API
 
-For security reason it is useful to install the [`dotenv` package](https://pub.dev/packages/dotenv).
+Nous disposons de 2 Bibliothèques ainsi qu'une API Restful qui vous permettra d'avoir une intégration plus fluide.
 
-```bash
-flutter pub add dotenv
-```
+- La Bibliothèque Javascript est compatible avec TypeScript.
+- La Bibliothèque Dart est compatible avec Flutter.
+- Vous pouvez utiliser le Restful API pour tout autre language.
 
-After the installation, you need to create a `.env` file in the root of your Flutter project.
+## Clé API
 
-```bash
-touch .env
-```
+Afin d'utiliser les différentes bibliothèques ou l'API Restful vous devrez fournir votre clé API qui est disponible dans la section paramètres de l'application [Mon SMS PRO](https://onelink.to/kg2z8q). <br />
+Une fois que vous avez récupéré cette clé dans votre presse-papier, suivez les instructions selon votre choix.
 
-Add the following lines to the `.env` file:
+## Documentation
 
-```bash
-API_KEY="your_api_key"
-```
-
-import the environment variables:
-
-```dart
-import 'package:dotenv/dotenv.dart';
-
-void main() async {
-  await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
-}
-```
-
-Create an instance of the MonSmsPro class:
-
-```dart
-final sms = MonSMSPRO(apiKey: dotenv.env['API_KEY'] ?? "");
-```
-
-Use the methods to send SMS:
-
-```dart
-import 'package:mon_sms_pro/mon_sms_pro.dart';
-
-// GET OTP
-ElevatedButton(
-    onPressed: () async {
-        final otp = await sms.otp.get(
-            GetOtpPayload(phoneNumber: "+2250000000000"),
-        );
-
-        if (otp != null) {
-            setState(() {
-                _token = otp.token;
-            });
-        }
-    },
-    child: const Text("GET OTP"),
-)
-```
-
-## Available methods
-
-| Method       | Description                                              |
-| ------------ | -------------------------------------------------------- |
-| `otp.get`    | Generates an OTP and sends it to the user's phone number |
-| `otp.verify` | Verifies a sent OTP                                      |
-
-## License
-
-The mon_sms_pro package is released under the [MIT License](https://opensource.org/licenses/MIT).
+Rendez-vous sur [notre site Web](https://docs.monsms.pro/libs/dart/get-started) pour plus d'informations.
