@@ -106,8 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           ElevatedButton(
             onPressed: () async {
-              final list = await sms.campain.list(
-                CampainListPayload(senderId: "ID GOES HERE"),
+              final list = await sms.campaign.list(
+                CampaignListPayload(senderId: "ID GOES HERE"),
               );
 
               box.put("CAMPAINS", list);

@@ -3,20 +3,20 @@ import 'package:mon_sms_pro/payload/core/base_payload.dart';
 import 'package:mon_sms_pro/payload/core/list_payload.dart';
 import 'package:mon_sms_pro/utils.dart';
 
-enum CampainOrderBy {
+enum CampaignOrderBy {
   type("type"),
   createdAt("createdAt");
 
   final String value;
 
-  const CampainOrderBy(this.value);
+  const CampaignOrderBy(this.value);
 }
 
-class CampainListPayload extends ListPayload {
-  final CampainOrderBy? orderBy;
+class CampaignListPayload extends ListPayload {
+  final CampaignOrderBy? orderBy;
   final String senderId;
 
-  CampainListPayload({
+  CampaignListPayload({
     super.apiKey,
     super.count,
     super.page,
@@ -25,8 +25,8 @@ class CampainListPayload extends ListPayload {
     required this.senderId,
   });
 
-  factory CampainListPayload.fromJson(Map<String, dynamic> json) {
-    return CampainListPayload(
+  factory CampaignListPayload.fromJson(Map<String, dynamic> json) {
+    return CampaignListPayload(
       senderId: json['senderId'],
       apiKey: json['apiKey'],
       count: json['count'],
@@ -34,9 +34,9 @@ class CampainListPayload extends ListPayload {
       sort: SortList.values.firstWhere(
         (e) => e.value == json['sort'],
       ), // == 'desc' ? SortList.desc : SortList.asc,
-      orderBy: CampainOrderBy.values.firstWhere(
+      orderBy: CampaignOrderBy.values.firstWhere(
         (e) => e.value == json['orderBy'],
-      ), // == 'type' ? CampainOrderBy.type : CampainOrderBy.createdAt,
+      ), // == 'type' ? CampaignOrderBy.type : CampaignOrderBy.createdAt,
     );
   }
 
@@ -49,12 +49,12 @@ class CampainListPayload extends ListPayload {
       'page': page,
       'sort': sort?.value, // == SortList.desc ? 'desc' : 'asc',
       'orderBy':
-          orderBy?.value, // == CampainOrderBy.type ? 'type' : 'createdAt',
+          orderBy?.value, // == CampaignOrderBy.type ? 'type' : 'createdAt',
     };
   }
 }
 
-class CreateCampainPayload extends BasePayload {
+class CreateCampaignPayload extends BasePayload {
   final String name;
   final List<ContactModel>? contacts;
   final List<String>? groupsIds;
@@ -63,7 +63,7 @@ class CreateCampainPayload extends BasePayload {
   final SMSType? type; // "SMS", "FLASH"
   final bool? forceSenderId;
 
-  CreateCampainPayload({
+  CreateCampaignPayload({
     required this.name,
     super.apiKey,
     this.contacts = const [],
@@ -74,10 +74,10 @@ class CreateCampainPayload extends BasePayload {
     this.forceSenderId = false,
   });
 
-  factory CreateCampainPayload.fromJson(Map<String, dynamic> json) {
+  factory CreateCampaignPayload.fromJson(Map<String, dynamic> json) {
     final contacts = json['contacts'] ?? [];
 
-    return CreateCampainPayload(
+    return CreateCampaignPayload(
       apiKey: json['apiKey'],
       name: json['name'],
       contacts: List.generate(

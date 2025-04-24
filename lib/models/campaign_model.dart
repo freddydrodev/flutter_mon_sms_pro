@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 import 'package:mon_sms_pro/utils.dart';
 
-part 'campain_model.g.dart';
+part 'campaign_model.g.dart';
 
 @HiveType(typeId: 0)
 class Coords {
@@ -36,7 +36,7 @@ class Coords {
 }
 
 @HiveType(typeId: 1)
-class CampainModel {
+class CampaignModel {
   @HiveField(0)
   final String id;
   @HiveField(1)
@@ -54,7 +54,7 @@ class CampainModel {
   @HiveField(7)
   final Coords? coords;
 
-  CampainModel({
+  CampaignModel({
     required this.id,
     required this.name,
     required this.type,
@@ -65,8 +65,8 @@ class CampainModel {
     this.coords,
   });
 
-  factory CampainModel.fromJson(Map<String, dynamic> json) {
-    return CampainModel(
+  factory CampaignModel.fromJson(Map<String, dynamic> json) {
+    return CampaignModel(
       id: json['id'],
       name: json['name'],
       type: SMSType.values.firstWhere((e) => e.value == json['type']),

@@ -1,19 +1,19 @@
 import 'package:dio/dio.dart';
-import 'package:mon_sms_pro/models/campain_model.dart';
-import 'package:mon_sms_pro/payload/campain_payload.dart';
+import 'package:mon_sms_pro/models/campaign_model.dart';
+import 'package:mon_sms_pro/payload/campaign_payload.dart';
 
 /// A class to handle API interactions related to campaigns.
-class CampainApi {
+class CampaignApi {
   final Dio _dio;
   final String _baseUrl;
   final String _apiKey;
 
-  /// Constructs a CampainApi instance.
+  /// Constructs a CampaignApi instance.
   ///
   /// [dio] is the Dio client for making HTTP requests.
   /// [baseUrl] is the base URL of the API.
   /// [apiKey] is the API key used for authentication.
-  const CampainApi({
+  const CampaignApi({
     required Dio dio,
     required String baseUrl,
     required String apiKey,
@@ -24,9 +24,9 @@ class CampainApi {
   /// Fetches a list of campaigns.
   ///
   /// [payload] contains optional parameters for filtering the list.
-  /// Returns a list of `CampainModel` instances.
-  Future<List<CampainModel>> list(CampainListPayload payload) async {
-    final url = "$_baseUrl/sender/${payload.senderId}/campain";
+  /// Returns a list of `CampaignModel` instances.
+  Future<List<CampaignModel>> list(CampaignListPayload payload) async {
+    final url = "$_baseUrl/sender/${payload.senderId}/campaign";
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
@@ -39,16 +39,16 @@ class CampainApi {
 
     return List.generate(
       list.length,
-      (i) => CampainModel.fromJson(list[i]),
+      (i) => CampaignModel.fromJson(list[i]),
     );
   }
 
   /// Creates a new campaign.
   ///
   /// [payload] contains the campaign creation data.
-  /// Returns the created `CampainModel` instance.
-  Future<CampainModel?> create(CreateCampainPayload payload) async {
-    final url = "$_baseUrl/campain/create";
+  /// Returns the created `CampaignModel` instance.
+  Future<CampaignModel?> create(CreateCampaignPayload payload) async {
+    final url = "$_baseUrl/campaign/create";
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
@@ -59,6 +59,6 @@ class CampainApi {
 
     final data = r.data['data'];
 
-    return CampainModel.fromJson(data);
+    return CampaignModel.fromJson(data);
   }
 }

@@ -1,13 +1,13 @@
 import 'package:hive/hive.dart';
-import 'package:mon_sms_pro/models/campain_model.dart';
+import 'package:mon_sms_pro/models/campaign_model.dart';
 import 'package:mon_sms_pro/models/contact_model.dart';
 import 'package:mon_sms_pro/models/otp_model.dart';
 import 'package:mon_sms_pro/models/sender_model.dart';
 import 'package:mon_sms_pro/utils.dart';
 
 Future initHiveAdapters() async {
-  if (!Hive.isAdapterRegistered(CampainModelAdapter().typeId)) {
-    Hive.registerAdapter(CampainModelAdapter());
+  if (!Hive.isAdapterRegistered(CampaignModelAdapter().typeId)) {
+    Hive.registerAdapter(CampaignModelAdapter());
   }
 
   if (!Hive.isAdapterRegistered(ContactModelAdapter().typeId)) {

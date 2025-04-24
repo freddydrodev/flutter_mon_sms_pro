@@ -1,7 +1,7 @@
 library mon_sms_pro;
 
 import 'package:dio/dio.dart';
-import 'package:mon_sms_pro/apis/campain_api.dart';
+import 'package:mon_sms_pro/apis/campaign_api.dart';
 import 'package:mon_sms_pro/apis/contact_api.dart';
 import 'package:mon_sms_pro/apis/otp_api.dart';
 import 'package:mon_sms_pro/apis/sender_api.dart';
@@ -20,7 +20,7 @@ class MonSMSPRO {
 
   const MonSMSPRO({required String apiKey}) : _apiKey = apiKey;
 
-  CampainApi get campain => CampainApi(
+  CampaignApi get campaign => CampaignApi(
         baseUrl: _baseUrl,
         dio: _dio,
         apiKey: _apiKey,

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'campain_model.dart';
+part of 'campaign_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -46,17 +46,17 @@ class CoordsAdapter extends TypeAdapter<Coords> {
           typeId == other.typeId;
 }
 
-class CampainModelAdapter extends TypeAdapter<CampainModel> {
+class CampaignModelAdapter extends TypeAdapter<CampaignModel> {
   @override
   final int typeId = 1;
 
   @override
-  CampainModel read(BinaryReader reader) {
+  CampaignModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return CampainModel(
+    return CampaignModel(
       id: fields[0] as String,
       name: fields[1] as String,
       type: fields[2] as SMSType,
@@ -69,7 +69,7 @@ class CampainModelAdapter extends TypeAdapter<CampainModel> {
   }
 
   @override
-  void write(BinaryWriter writer, CampainModel obj) {
+  void write(BinaryWriter writer, CampaignModel obj) {
     writer
       ..writeByte(8)
       ..writeByte(0)
@@ -96,7 +96,7 @@ class CampainModelAdapter extends TypeAdapter<CampainModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CampainModelAdapter &&
+      other is CampaignModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
