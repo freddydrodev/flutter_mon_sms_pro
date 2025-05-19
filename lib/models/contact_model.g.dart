@@ -8,7 +8,7 @@ part of 'contact_model.dart';
 
 class ContactModelAdapter extends TypeAdapter<ContactModel> {
   @override
-  final int typeId = 2;
+  final typeId = 2;
 
   @override
   ContactModel read(BinaryReader reader) {
@@ -23,7 +23,8 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       firstName: fields[3] as String?,
       lastName: fields[4] as String?,
       sex: fields[5] as SexType?,
-      groupIds: (fields[6] as List).cast<String>(),
+      groupIds:
+          fields[6] == null ? const [] : (fields[6] as List).cast<String>(),
     );
   }
 

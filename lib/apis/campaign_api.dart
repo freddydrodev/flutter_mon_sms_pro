@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:mon_sms_pro/models/campaign_model.dart';
+import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
 import 'package:mon_sms_pro/payload/campaign_payload.dart';
 
 /// A class to handle API interactions related to campaigns.

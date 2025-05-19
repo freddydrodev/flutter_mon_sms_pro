@@ -8,7 +8,7 @@ part of 'sender_model.dart';
 
 class SenderModelAdapter extends TypeAdapter<SenderModel> {
   @override
-  final int typeId = 6;
+  final typeId = 6;
 
   @override
   SenderModel read(BinaryReader reader) {
@@ -60,7 +60,7 @@ class SenderModelAdapter extends TypeAdapter<SenderModel> {
 
 class SenderStatusAdapter extends TypeAdapter<SenderStatus> {
   @override
-  final int typeId = 5;
+  final typeId = 5;
 
   @override
   SenderStatus read(BinaryReader reader) {
@@ -83,16 +83,12 @@ class SenderStatusAdapter extends TypeAdapter<SenderStatus> {
     switch (obj) {
       case SenderStatus.pending:
         writer.writeByte(0);
-        break;
       case SenderStatus.submited:
         writer.writeByte(1);
-        break;
       case SenderStatus.accepted:
         writer.writeByte(2);
-        break;
       case SenderStatus.refused:
         writer.writeByte(3);
-        break;
     }
   }
 

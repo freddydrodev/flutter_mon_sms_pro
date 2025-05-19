@@ -8,7 +8,7 @@ part of 'otp_model.dart';
 
 class OTPModelAdapter extends TypeAdapter<OTPModel> {
   @override
-  final int typeId = 4;
+  final typeId = 4;
 
   @override
   OTPModel read(BinaryReader reader) {
@@ -48,7 +48,7 @@ class OTPModelAdapter extends TypeAdapter<OTPModel> {
 
 class OTPStatusAdapter extends TypeAdapter<OTPStatus> {
   @override
-  final int typeId = 3;
+  final typeId = 3;
 
   @override
   OTPStatus read(BinaryReader reader) {
@@ -69,13 +69,10 @@ class OTPStatusAdapter extends TypeAdapter<OTPStatus> {
     switch (obj) {
       case OTPStatus.pending:
         writer.writeByte(0);
-        break;
       case OTPStatus.verified:
         writer.writeByte(1);
-        break;
       case OTPStatus.demo:
         writer.writeByte(2);
-        break;
     }
   }
 
