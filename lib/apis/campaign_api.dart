@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
 import 'package:mon_sms_pro/payload/campaign_payload.dart';
 
@@ -25,40 +26,46 @@ class CampaignApi {
   ///
   /// [payload] contains optional parameters for filtering the list.
   /// Returns a list of `CampaignModel` instances.
-  Future<List<CampaignModel>> list(CampaignListPayload payload) async {
+  Future<ApiResponseModel<List<CampaignModel>>> list(
+      CampaignListPayload payload) async {
     final url = "$_baseUrl/sender/${payload.senderId}/campaign";
+
+    print("flutter_mon_sms_pro/campaign/list/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return [];
+    print("flutter_mon_sms_pro/campaign/list/data: ${r.data}");
 
-    final list = r.data['data'] as List;
-
-    return List.generate(
-      list.length,
-      (i) => CampaignModel.fromJson(list[i]),
+    final response = ApiResponseModel.fromJson(
+      r.data,
+      (json) => (json as List).map((e) => CampaignModel.fromJson(e)).toList(),
     );
+
+    return response;
   }
 
   /// Creates a new campaign.
   ///
   /// [payload] contains the campaign creation data.
   /// Returns the created `CampaignModel` instance.
-  Future<CampaignModel?> create(CreateCampaignPayload payload) async {
+  Future<ApiResponseModel<CampaignModel?>> create(
+      CreateCampaignPayload payload) async {
     final url = "$_baseUrl/campaign/create";
+
+    print("flutter_mon_sms_pro/campaign/create/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    print("flutter_mon_sms_pro/campaign/create/data: ${r.data}");
 
-    final data = r.data['data'];
+    final response = ApiResponseModel.fromJson(r.data, CampaignModel.fromJson);
 
-    return CampaignModel.fromJson(data);
+    return response;
   }
 }

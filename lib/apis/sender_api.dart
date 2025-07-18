@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/sender_model.dart';
 import 'package:mon_sms_pro/payload/sender_payload.dart';
 
@@ -25,84 +26,89 @@ class SenderApi {
   ///
   /// [payload] contains optional parameters for filtering the list.
   /// Returns a list of `SenderModel` instances.
-  Future<List<SenderModel>> list([SenderListPayload? payload]) async {
+  Future<ApiResponseModel<List<SenderModel>>> list(
+      [SenderListPayload? payload]) async {
     final url = "$_baseUrl/sender/list";
+
+    print("flutter_mon_sms_pro/sender/list/payload: ${payload?.toJson()}");
 
     final r = await _dio.post(url, data: {
       if (payload != null) ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print(r.data);
+    print("flutter_mon_sms_pro/sender/list/data: ${r.data}");
 
-    if (r.data['error'] != null) {
-      print(r.data['error']);
-
-      return [];
-    }
-
-    final list = r.data['data'] as List;
-
-    return List.generate(
-      list.length,
-      (i) => SenderModel.fromJson(list[i]),
+    final response = ApiResponseModel.fromJson(
+      r.data,
+      (json) => (json as List).map((e) => SenderModel.fromJson(e)).toList(),
     );
+
+    return response;
   }
 
   /// Creates a new campaign.
   ///
   /// [payload] contains the campaign creation data.
   /// Returns the created `SenderModel` instance.
-  Future<SenderModel?> create(CreateSenderPayload payload) async {
+  Future<ApiResponseModel<SenderModel?>> create(
+      CreateSenderPayload payload) async {
     final url = "$_baseUrl/sender/create";
+
+    print("flutter_mon_sms_pro/sender/create/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    print("flutter_mon_sms_pro/sender/create/data: ${r.data}");
 
-    final data = r.data['data'];
+    final response = ApiResponseModel.fromJson(r.data, SenderModel.fromJson);
 
-    return SenderModel.fromJson(data);
+    return response;
   }
 
   /// Retrieves a sender from the sender list.
   ///
   /// [payload] contains the ID of the sender to retrieve.
   /// Returns a `SenderModel` instance if successful, or `null` if there's an error.
-  Future<SenderModel?> get(GetSenderPayload payload) async {
+  Future<ApiResponseModel<SenderModel?>> get(GetSenderPayload payload) async {
     final url = "$_baseUrl/sender/${payload.id}";
+
+    print("flutter_mon_sms_pro/sender/get/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    print("flutter_mon_sms_pro/sender/get/data: ${r.data}");
 
-    final data = r.data['data'];
+    final response = ApiResponseModel.fromJson(r.data, SenderModel.fromJson);
 
-    return SenderModel.fromJson(data);
+    return response;
   }
 
   /// Updates a sender in the sender list.
   ///
   /// [payload] contains the updated sender data.
   /// Returns a `SenderModel` instance if successful, or `null` if there's an error.
-  Future<SenderModel?> update(GetSenderPayload payload) async {
+  Future<ApiResponseModel<SenderModel?>> update(
+      GetSenderPayload payload) async {
     final url = "$_baseUrl/sender/${payload.id}/update";
+
+    print("flutter_mon_sms_pro/sender/update/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    print("flutter_mon_sms_pro/sender/update/data: ${r.data}");
 
-    final data = r.data['data'];
+    final response = ApiResponseModel.fromJson(r.data, SenderModel.fromJson);
 
-    return SenderModel.fromJson(data);
+    return response;
   }
 }

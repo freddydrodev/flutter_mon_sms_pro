@@ -68,9 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 GetOtpPayload(phoneNumber: "+2250708517414"),
               );
 
-              if (otp != null) {
+              if (otp.success && otp.data != null) {
                 setState(() {
-                  _token = otp.token;
+                  _token = otp.data!.token;
                 });
               }
             },

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/otp_model.dart';
 import 'package:mon_sms_pro/payload/otp_payload.dart';
 
@@ -25,45 +26,41 @@ class OtpApi {
   ///
   /// [payload] contains the data required to request an OTP.
   /// Returns an `OTPModel` instance if successful, or `null` if there's an error.
-  Future get(GetOtpPayload payload) async {
+  Future<ApiResponseModel<OTPModel?>> get(GetOtpPayload payload) async {
     final url = "$_baseUrl/auth/otp/get";
+
+    print("flutter_mon_sms_pro/otp/get/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) {
-      print(r.data['error']);
+    print("flutter_mon_sms_pro/otp/get/data: ${r.data}");
 
-      return null;
-    }
+    final response = ApiResponseModel.fromJson(r.data, OTPModel.fromJson);
 
-    final data = r.data['data'];
-
-    return OTPModel.fromJson(data);
+    return response;
   }
 
   /// Verifies an OTP.
   ///
   /// [payload] contains the data required to verify an OTP.
   /// Returns an `OTPModel` instance if successful, or `null` if there's an error.
-  Future verify(VerifyOtpPayload payload) async {
+  Future<ApiResponseModel<OTPModel?>> verify(VerifyOtpPayload payload) async {
     final url = "$_baseUrl/auth/otp/verify";
+
+    print("flutter_mon_sms_pro/otp/verify/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) {
-      print(r.data['error']);
+    print("flutter_mon_sms_pro/otp/verify/data: ${r.data}");
 
-      return null;
-    }
+    final response = ApiResponseModel.fromJson(r.data, OTPModel.fromJson);
 
-    final data = r.data['data'];
-
-    return OTPModel.fromJson(data);
+    return response;
   }
 }

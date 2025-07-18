@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/contact_model.dart';
 import 'package:mon_sms_pro/payload/contact_payload.dart';
 
@@ -25,99 +26,110 @@ class ContactApi {
   ///
   /// [payload] contains optional parameters for filtering the list.
   /// Returns a list of `ContactModel` instances.
-  Future<List<ContactModel>> list([ContactListPayload? payload]) async {
+  Future<ApiResponseModel<List<ContactModel>>> list(
+      [ContactListPayload? payload]) async {
     final url = "$_baseUrl/contact/list";
+
+    print("flutter_mon_sms_pro/contact/list/payload: ${payload?.toJson()}");
 
     final r = await _dio.post(url, data: {
       if (payload != null) ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print(r.data);
+    print("flutter_mon_sms_pro/contact/list/data: ${r.data}");
 
-    if (r.data['error'] != null) {
-      print(r.data['error']);
-
-      return [];
-    }
-
-    final list = r.data['data'] as List;
-
-    return List.generate(
-      list.length,
-      (i) => ContactModel.fromJson(list[i]),
+    final response = ApiResponseModel.fromJson(
+      r.data,
+      (json) => (json as List).map((e) => ContactModel.fromJson(e)).toList(),
     );
+
+    return response;
   }
 
   /// Creates a new campaign.
   ///
   /// [payload] contains the campaign creation data.
   /// Returns the created `ContactModel` instance.
-  Future<ContactModel?> create(CreateContactPayload payload) async {
+  Future<ApiResponseModel<ContactModel?>> create(
+      CreateContactPayload payload) async {
     final url = "$_baseUrl/contact/create";
+
+    print("flutter_mon_sms_pro/contact/create/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    print("flutter_mon_sms_pro/contact/create/data: ${r.data}");
 
-    final data = r.data['data'];
+    final response = ApiResponseModel.fromJson(r.data, ContactModel.fromJson);
 
-    return ContactModel.fromJson(data);
+    return response;
   }
 
   /// Deletes one or more contacts from the contact list.
   ///
   /// [payload] contains the IDs of the contacts to delete.
   /// Returns `null` if there's an error, or nothing if successful.
-  Future delete(DeleteContactPayload payload) async {
+  Future<ApiResponseModel<void>> delete(DeleteContactPayload payload) async {
     final url = "$_baseUrl/contact/delete";
+
+    print("flutter_mon_sms_pro/contact/delete/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    print("flutter_mon_sms_pro/contact/delete/data: ${r.data}");
+
+    final response = ApiResponseModel.fromJson(r.data, (json) => null);
+
+    return response;
   }
 
   /// Retrieves a contact from the contact list.
   ///
   /// [payload] contains the ID of the contact to retrieve.
   /// Returns a `ContactModel` instance if successful, or `null` if there's an error.
-  Future<ContactModel?> get(GetContactPayload payload) async {
+  Future<ApiResponseModel<ContactModel?>> get(GetContactPayload payload) async {
     final url = "$_baseUrl/contact/${payload.id}";
+
+    print("flutter_mon_sms_pro/contact/get/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    print("flutter_mon_sms_pro/contact/get/data: ${r.data}");
 
-    final data = r.data['data'];
+    final response = ApiResponseModel.fromJson(r.data, ContactModel.fromJson);
 
-    return ContactModel.fromJson(data);
+    return response;
   }
 
   /// Updates a contact in the contact list.
   ///
   /// [payload] contains the updated contact data.
   /// Returns a `ContactModel` instance if successful, or `null` if there's an error.
-  Future<ContactModel?> update(GetContactPayload payload) async {
+  Future<ApiResponseModel<ContactModel?>> update(
+      GetContactPayload payload) async {
     final url = "$_baseUrl/contact/${payload.id}/update";
+
+    print("flutter_mon_sms_pro/contact/update/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    if (r.data['error'] != null) return null;
+    print("flutter_mon_sms_pro/contact/update/data: ${r.data}");
 
-    final data = r.data['data'];
+    final response = ApiResponseModel.fromJson(r.data, ContactModel.fromJson);
 
-    return ContactModel.fromJson(data);
+    return response;
   }
 }
