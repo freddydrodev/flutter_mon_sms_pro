@@ -1,4 +1,5 @@
 import 'package:hive_ce/hive.dart';
+import 'package:mon_sms_pro/models/contact_model.dart';
 
 part 'group_model.g.dart';
 
@@ -14,6 +15,10 @@ class GroupModel {
   final DateTime createdAt;
   @HiveField(4)
   final String userId;
+  @HiveField(5)
+  final GroupCountModel? count;
+  @HiveField(6)
+  final List<GroupContactListModel>? contactInGroups;
 
   GroupModel({
     this.id,
@@ -21,6 +26,8 @@ class GroupModel {
     this.description,
     required this.createdAt,
     required this.userId,
+    this.count,
+    this.contactInGroups,
   });
 
   factory GroupModel.fromJson(Map<String, dynamic> json) {
@@ -30,6 +37,14 @@ class GroupModel {
       description: json['description'],
       createdAt: DateTime.parse(json['createdAt']),
       userId: json['userId'],
+      count: json['_count'] != null
+          ? GroupCountModel.fromJson(json['_count'])
+          : null,
+      contactInGroups: json['contactInGroups'] != null
+          ? json['contactInGroups']
+              .map((e) => GroupContactListModel.fromJson(e))
+              .toList()
+          : [],
     );
   }
 
@@ -40,6 +55,47 @@ class GroupModel {
       'description': description,
       'createdAt': createdAt.toIso8601String(),
       'userId': userId,
+      'count': count?.toJson(),
+      'contactInGroups': contactInGroups?.map((e) => e.toJson()).toList(),
+    };
+  }
+}
+
+@HiveType(typeId: 171)
+class GroupCountModel {
+  @HiveField(0)
+  final int contactInGroups;
+
+  GroupCountModel({required this.contactInGroups});
+
+  factory GroupCountModel.fromJson(Map<String, dynamic> json) {
+    return GroupCountModel(
+      contactInGroups: json['contactInGroups'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'contactInGroups': contactInGroups,
+    };
+  }
+}
+
+class GroupContactListModel {
+  @HiveField(0)
+  final ContactModel contact;
+
+  GroupContactListModel({required this.contact});
+
+  factory GroupContactListModel.fromJson(Map<String, dynamic> json) {
+    return GroupContactListModel(
+      contact: ContactModel.fromJson(json['contact']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'contact': contact.toJson(),
     };
   }
 }

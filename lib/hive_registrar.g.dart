@@ -9,7 +9,6 @@ import 'package:mon_sms_pro/models/company_followed_model.dart';
 import 'package:mon_sms_pro/models/company_type_model.dart';
 import 'package:mon_sms_pro/models/contact_model.dart';
 import 'package:mon_sms_pro/models/follower_model.dart';
-import 'package:mon_sms_pro/models/group_model.dart';
 import 'package:mon_sms_pro/models/import_model.dart';
 import 'package:mon_sms_pro/models/offer_model.dart';
 import 'package:mon_sms_pro/models/otp_model.dart';
@@ -30,7 +29,6 @@ extension HiveRegistrar on HiveInterface {
     registerAdapter(CoordsAdapter());
     registerAdapter(CountryAdapter());
     registerAdapter(FollowerModelAdapter());
-    registerAdapter(GroupModelAdapter());
     registerAdapter(ImportModelAdapter());
     registerAdapter(LocationAdapter());
     registerAdapter(OTPModelAdapter());
@@ -61,7 +59,6 @@ extension IsolatedHiveRegistrar on IsolatedHiveInterface {
     registerAdapter(CoordsAdapter());
     registerAdapter(CountryAdapter());
     registerAdapter(FollowerModelAdapter());
-    registerAdapter(GroupModelAdapter());
     registerAdapter(ImportModelAdapter());
     registerAdapter(LocationAdapter());
     registerAdapter(OTPModelAdapter());
