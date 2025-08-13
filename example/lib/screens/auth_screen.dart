@@ -1,6 +1,7 @@
 import 'package:example/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:mon_sms_pro/mon_sms_pro.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -27,7 +28,10 @@ class _AuthScreenState extends State<AuthScreen> {
           ElevatedButton(
             onPressed: () async {
               final otp = await sms.otp.get(
-                GetOtpPayload(phoneNumber: "+2250708517414"),
+                GetOtpPayload(
+                  phoneNumber: "+2250708517414",
+                  senderId: dotenv.env['SENDER_ID'],
+                ),
               );
 
               if (otp.success && otp.data != null) {
