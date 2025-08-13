@@ -1,31 +1,17 @@
 import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
-part 'transaction_model.g.dart';
-
-@HiveType(typeId: 800)
-class TransactionModel {
-  @HiveField(0)
+class TransactionModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final TransactionType type;
-  @HiveField(2)
   final TransactionStatus status;
-  @HiveField(3)
   final PaymentMethod paymentMethod;
-  @HiveField(4)
   final String token;
-  @HiveField(5)
   final int credit;
-  @HiveField(6)
   final int price;
-  @HiveField(7)
   final DateTime createdAt;
-  @HiveField(8)
   final String userId;
-  @HiveField(9)
   final String? campainId;
-  @HiveField(10)
   final String? offerId;
 
   TransactionModel({

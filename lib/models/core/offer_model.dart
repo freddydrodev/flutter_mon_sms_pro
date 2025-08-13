@@ -1,19 +1,11 @@
 import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
-part 'offer_model.g.dart';
-
-@HiveType(typeId: 301)
-class OfferModel {
-  @HiveField(0)
+class OfferModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final OfferName name;
-  @HiveField(2)
   final int price;
-  @HiveField(3)
   final int credit;
-  @HiveField(4)
   final DateTime createdAt;
 
   OfferModel({

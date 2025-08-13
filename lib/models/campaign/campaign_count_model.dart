@@ -1,12 +1,7 @@
 import 'package:hive_ce/hive.dart';
 
-part 'campaign_count_model.g.dart';
-
-@HiveType(typeId: 100)
-class CampaignCountModel {
-  @HiveField(0)
+class CampaignCountModel extends HiveObject {
   final int contacts;
-  @HiveField(1)
   final int groups;
 
   CampaignCountModel({

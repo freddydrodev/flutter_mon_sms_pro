@@ -1,16 +1,9 @@
 import 'package:hive_ce/hive.dart';
 
-part 'company_followed_model.g.dart';
-
-@HiveType(typeId: 500)
-class CompanyFollowedModel {
-  @HiveField(0)
+class CompanyFollowedModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final String companyId;
-  @HiveField(2)
   final String followerId;
-  @HiveField(3)
   final DateTime createdAt;
 
   CompanyFollowedModel({

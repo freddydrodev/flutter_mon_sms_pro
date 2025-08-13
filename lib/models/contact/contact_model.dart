@@ -1,16 +1,9 @@
 import 'package:hive_ce/hive.dart';
 
-part 'contact_model.g.dart';
-
-@HiveType(typeId: 200)
-class ContactModel {
-  @HiveField(0)
+class ContactModel extends HiveObject {
   final String phone;
-  @HiveField(1)
   final String id;
-  @HiveField(2)
   final String name;
-  @HiveField(3)
   final DateTime createdAt;
 
   ContactModel({

@@ -4,23 +4,18 @@ import 'package:example/screens/group_screen.dart';
 import 'package:example/screens/sender_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/mon_sms_pro.dart';
-// import 'package:mon_sms_pro/models/hive.dart';
-import 'package:hive_ce_flutter/hive_flutter.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter(
-    "sms_example",
-    HiveStorageBackendPreference.native,
-    1,
-  );
-
+  // Initialize Hive adapters
   await initHiveAdapters();
 
+  // Open the main box
   await Hive.openBox('SMS_EXAMPLE');
 
   runApp(const MyApp());

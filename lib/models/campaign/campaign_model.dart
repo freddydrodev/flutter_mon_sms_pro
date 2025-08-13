@@ -2,25 +2,14 @@ import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_count_model.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
-part 'campaign_model.g.dart';
-
-@HiveType(typeId: 101)
-class CampaignModel {
-  @HiveField(0)
+class CampaignModel extends HiveObject {
   final String id;
-  @HiveField(1)
   final String text;
-  @HiveField(2)
   final bool? isEnabled;
-  @HiveField(3)
   final SMSType type;
-  @HiveField(4)
   final int contactCount;
-  @HiveField(5)
   final int creditUsed;
-  @HiveField(6)
   final DateTime createdAt;
-  @HiveField(7)
   final CampaignCountModel count;
 
   CampaignModel({

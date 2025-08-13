@@ -2,19 +2,11 @@ import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/contact/contact_model.dart';
 import 'package:mon_sms_pro/models/group/group_count_model.dart';
 
-part 'group_model.g.dart';
-
-@HiveType(typeId: 400)
-class GroupModel {
-  @HiveField(0)
+class GroupModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final String name;
-  @HiveField(3)
   final DateTime createdAt;
-  @HiveField(5)
   final GroupCountModel? count;
-  @HiveField(6)
   final List<ContactModel>? contacts;
 
   GroupModel({

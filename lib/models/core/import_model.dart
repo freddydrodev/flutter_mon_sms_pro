@@ -1,14 +1,8 @@
 import 'package:hive_ce/hive.dart';
 
-part 'import_model.g.dart';
-
-@HiveType(typeId: 300)
-class ImportModel {
-  @HiveField(0)
+class ImportModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final String userId;
-  @HiveField(2)
   final DateTime createdAt;
 
   ImportModel({

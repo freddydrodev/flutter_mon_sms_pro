@@ -1,45 +1,24 @@
 import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
-part 'user_model.g.dart';
-
-@HiveType(typeId: 304)
-class UserModel {
-  @HiveField(0)
+class UserModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final String? emailAddress;
-  @HiveField(2)
   final String phoneNumber;
-  @HiveField(3)
   final String? password;
-  @HiveField(4)
   final String fullName;
-  @HiveField(5)
   final DateTime createdAt;
-  @HiveField(6)
   final bool isAdmin;
-  @HiveField(7)
   final bool newUser;
-  @HiveField(8)
   final String? xoraiaID;
-  @HiveField(9)
   final String apiKey;
-  @HiveField(10)
   final String? token;
-  @HiveField(11)
   final DateTime? tokenExpirationDate;
-  @HiveField(12)
   final String? companyTypeId;
-  @HiveField(13)
   final String? logo;
-  @HiveField(14)
   final String? description;
-  @HiveField(15)
   final String? address;
-  @HiveField(16)
   final String? city;
-  @HiveField(17)
   final Country? country;
 
   UserModel({

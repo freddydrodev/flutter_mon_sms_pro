@@ -1,14 +1,8 @@
 import 'package:hive_ce/hive.dart';
 
-part 'otp_model.g.dart';
-
-@HiveType(typeId: 302)
 enum OTPStatus {
-  @HiveField(0)
   pending("PENDING"),
-  @HiveField(1)
   verified("VERIFIED"),
-  @HiveField(2)
   demo("DEMO");
 
   final String value;
@@ -24,15 +18,11 @@ enum OTPStatus {
   }
 }
 
-@HiveType(typeId: 303)
-class OTPModel {
-  @HiveField(0)
+class OTPModel extends HiveObject {
   final String token;
 
-  @HiveField(1)
   final String phoneNumber;
 
-  @HiveField(2)
   final OTPStatus status;
 
   OTPModel({

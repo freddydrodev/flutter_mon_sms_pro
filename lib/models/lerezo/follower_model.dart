@@ -1,29 +1,16 @@
 import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
-part 'follower_model.g.dart';
-
-@HiveType(typeId: 502)
-class FollowerModel {
-  @HiveField(0)
+class FollowerModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final String phoneNumber;
-  @HiveField(2)
   final String? password;
-  @HiveField(3)
   final String name;
-  @HiveField(4)
   final String? photo;
-  @HiveField(5)
   final String apiKey;
-  @HiveField(6)
   final Location? location;
-  @HiveField(7)
   final String? notificationToken;
-  @HiveField(8)
   final Country? country;
-  @HiveField(9)
   final DateTime createdAt;
 
   FollowerModel({
@@ -50,9 +37,8 @@ class FollowerModel {
       location:
           json['location'] != null ? Location.fromJson(json['location']) : null,
       notificationToken: json['notificationToken'],
-      country: json['country'] != null
-          ? Country.fromValue(json['country'])
-          : null,
+      country:
+          json['country'] != null ? Country.fromValue(json['country']) : null,
       createdAt: DateTime.parse(json['createdAt']),
     );
   }

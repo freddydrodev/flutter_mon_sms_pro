@@ -1,16 +1,9 @@
 import 'package:hive_ce/hive.dart';
 
-part 'template_model.g.dart';
-
-@HiveType(typeId: 700)
-class TemplateModel {
-  @HiveField(0)
+class TemplateModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final String text;
-  @HiveField(2)
   final DateTime createdAt;
-  @HiveField(3)
   final String userId;
 
   TemplateModel({

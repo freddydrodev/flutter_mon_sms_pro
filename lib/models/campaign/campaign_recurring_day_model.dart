@@ -1,28 +1,15 @@
 import 'package:hive_ce/hive.dart';
 
-part 'campaign_recurring_day_model.g.dart';
-
-@HiveType(typeId: 102)
-class CampaignRecurringDayModel {
-  @HiveField(0)
+class CampaignRecurringDayModel extends HiveObject {
   final String? id;
-  @HiveField(1)
   final bool enabled;
-  @HiveField(2)
   final DateTime? monday;
-  @HiveField(3)
   final DateTime? tuesday;
-  @HiveField(4)
   final DateTime? wednesday;
-  @HiveField(5)
   final DateTime? thursday;
-  @HiveField(6)
   final DateTime? friday;
-  @HiveField(7)
   final DateTime? saturday;
-  @HiveField(8)
   final DateTime? sunday;
-  @HiveField(9)
   final String campaignId;
 
   CampaignRecurringDayModel({
