@@ -4,8 +4,6 @@ import 'package:mon_sms_pro/models/utils.dart';
 import 'package:flutter/foundation.dart';
 
 Future initHiveAdapters() async {
-  debugPrint("flutter_mon_sms_pro/hive/initHiveAdapters");
-
   // Utility Types and Enums from utils.dart
   if (!Hive.isAdapterRegistered(SMSTypeAdapter().typeId)) {
     debugPrint("flutter_mon_sms_pro/hive/sms_type/register");
