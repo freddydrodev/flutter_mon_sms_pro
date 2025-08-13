@@ -5,18 +5,21 @@
 import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_recurring_day_model.dart';
-import 'package:mon_sms_pro/models/company_followed_model.dart';
-import 'package:mon_sms_pro/models/company_type_model.dart';
-import 'package:mon_sms_pro/models/contact_model.dart';
-import 'package:mon_sms_pro/models/follower_model.dart';
-import 'package:mon_sms_pro/models/import_model.dart';
-import 'package:mon_sms_pro/models/offer_model.dart';
-import 'package:mon_sms_pro/models/otp_model.dart';
-import 'package:mon_sms_pro/models/sender_model.dart';
-import 'package:mon_sms_pro/models/template_model.dart';
-import 'package:mon_sms_pro/models/transaction_model.dart';
-import 'package:mon_sms_pro/models/user_model.dart';
-import 'package:mon_sms_pro/models/version_model.dart';
+import 'package:mon_sms_pro/models/contact/contact_model.dart';
+import 'package:mon_sms_pro/models/core/import_model.dart';
+import 'package:mon_sms_pro/models/core/offer_model.dart';
+import 'package:mon_sms_pro/models/core/otp_model.dart';
+import 'package:mon_sms_pro/models/core/user_model.dart';
+import 'package:mon_sms_pro/models/core/version_model.dart';
+import 'package:mon_sms_pro/models/group/group_contact_list_model.dart';
+import 'package:mon_sms_pro/models/group/group_count_model.dart';
+import 'package:mon_sms_pro/models/group/group_model.dart';
+import 'package:mon_sms_pro/models/lerezo/company_followed_model.dart';
+import 'package:mon_sms_pro/models/lerezo/company_type_model.dart';
+import 'package:mon_sms_pro/models/lerezo/follower_model.dart';
+import 'package:mon_sms_pro/models/sender/sender_model.dart';
+import 'package:mon_sms_pro/models/template/template_model.dart';
+import 'package:mon_sms_pro/models/transaction/transaction_model.dart';
 import 'package:mon_sms_pro/utils.dart';
 
 extension HiveRegistrar on HiveInterface {
@@ -29,6 +32,9 @@ extension HiveRegistrar on HiveInterface {
     registerAdapter(CoordsAdapter());
     registerAdapter(CountryAdapter());
     registerAdapter(FollowerModelAdapter());
+    registerAdapter(GroupContactListModelAdapter());
+    registerAdapter(GroupCountModelAdapter());
+    registerAdapter(GroupModelAdapter());
     registerAdapter(ImportModelAdapter());
     registerAdapter(LocationAdapter());
     registerAdapter(OTPModelAdapter());
@@ -59,6 +65,9 @@ extension IsolatedHiveRegistrar on IsolatedHiveInterface {
     registerAdapter(CoordsAdapter());
     registerAdapter(CountryAdapter());
     registerAdapter(FollowerModelAdapter());
+    registerAdapter(GroupContactListModelAdapter());
+    registerAdapter(GroupCountModelAdapter());
+    registerAdapter(GroupModelAdapter());
     registerAdapter(ImportModelAdapter());
     registerAdapter(LocationAdapter());
     registerAdapter(OTPModelAdapter());

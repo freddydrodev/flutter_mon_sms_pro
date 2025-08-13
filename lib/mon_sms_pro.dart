@@ -12,14 +12,14 @@ export 'package:mon_sms_pro/models/models.dart';
 export 'package:mon_sms_pro/hive.dart';
 
 class MonSMSPRO {
-  String get _baseUrl => "https://rest.monsms.pro/v1";
-  //"https://rest.monsmspro.freddydro.dev/api"; // "https://rest.monsms.pro/api"
-
   Dio get _dio => Dio();
 
   final String _apiKey;
+  final String _baseUrl;
 
-  const MonSMSPRO({required String apiKey}) : _apiKey = apiKey;
+  const MonSMSPRO({required String apiKey, String? baseUrl})
+      : _apiKey = apiKey,
+        _baseUrl = baseUrl ?? "https://rest.monsms.pro/v1";
 
   CampaignApi get campaign => CampaignApi(
         baseUrl: _baseUrl,

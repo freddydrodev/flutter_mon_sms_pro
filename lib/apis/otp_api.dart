@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
-import 'package:mon_sms_pro/models/otp_model.dart';
+import 'package:mon_sms_pro/models/models.dart';
 import 'package:mon_sms_pro/payload/otp_payload.dart';
 
 /// A class to handle OTP related API interactions.
@@ -28,6 +28,8 @@ class OtpApi {
   /// Returns an `OTPModel` instance if successful, or `null` if there's an error.
   Future<ApiResponseModel<OTPModel?>> get(GetOtpPayload payload) async {
     final url = "$_baseUrl/auth/otp/get";
+
+    print("flutter_mon_sms_pro/otp/get/url: $url");
 
     print("flutter_mon_sms_pro/otp/get/payload: ${payload.toJson()}");
 

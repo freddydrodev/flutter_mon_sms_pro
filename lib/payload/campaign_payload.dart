@@ -1,4 +1,4 @@
-import 'package:mon_sms_pro/models/contact_model.dart';
+import 'package:mon_sms_pro/models/models.dart';
 import 'package:mon_sms_pro/payload/core/base_payload.dart';
 import 'package:mon_sms_pro/payload/core/list_payload.dart';
 import 'package:mon_sms_pro/utils.dart';

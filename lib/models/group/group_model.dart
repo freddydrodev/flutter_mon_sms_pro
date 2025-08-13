@@ -1,5 +1,6 @@
 import 'package:hive_ce/hive.dart';
-import 'package:mon_sms_pro/models/contact_model.dart';
+import 'package:mon_sms_pro/models/group/group_contact_list_model.dart';
+import 'package:mon_sms_pro/models/group/group_count_model.dart';
 
 part 'group_model.g.dart';
 
@@ -57,45 +58,6 @@ class GroupModel {
       'userId': userId,
       'count': count?.toJson(),
       'contactInGroups': contactInGroups?.map((e) => e.toJson()).toList(),
-    };
-  }
-}
-
-@HiveType(typeId: 171)
-class GroupCountModel {
-  @HiveField(0)
-  final int contactInGroups;
-
-  GroupCountModel({required this.contactInGroups});
-
-  factory GroupCountModel.fromJson(Map<String, dynamic> json) {
-    return GroupCountModel(
-      contactInGroups: json['contactInGroups'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'contactInGroups': contactInGroups,
-    };
-  }
-}
-
-class GroupContactListModel {
-  @HiveField(0)
-  final ContactModel contact;
-
-  GroupContactListModel({required this.contact});
-
-  factory GroupContactListModel.fromJson(Map<String, dynamic> json) {
-    return GroupContactListModel(
-      contact: ContactModel.fromJson(json['contact']),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'contact': contact.toJson(),
     };
   }
 }

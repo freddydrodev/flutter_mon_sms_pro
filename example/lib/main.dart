@@ -1,7 +1,8 @@
+import 'package:example/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mon_sms_pro/mon_sms_pro.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Mon SMS Pro Library Demo'),
+      routes: {
+        "/auth": (context) => const AuthScreen(),
+      },
     );
   }
 }
@@ -43,15 +47,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String? _token;
-
-  // TODO: ADD SMS_API_KEY TO .env file
-  final sms = MonSMSPRO(apiKey: dotenv.env['SMS_API_KEY'] ?? "");
-
-  final _otpController = TextEditingController(text: "");
-
-  final box = Hive.box('SMS_EXAMPLE');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,69 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: ListView(
-        padding: const EdgeInsets.all(15),
         children: [
-          ElevatedButton(
-            onPressed: () async {
-              final otp = await sms.otp.get(
-                GetOtpPayload(phoneNumber: "+2250708517414"),
-              );
-
-              if (otp.success && otp.data != null) {
-                setState(() {
-                  _token = otp.data!.token;
-                });
-              }
+          ListTile(
+            title: const Text("Auth Screen"),
+            onTap: () {
+              Navigator.pushNamed(context, "/auth");
             },
-            child: const Text("GET OTP"),
-          ),
-          if (_token != null) ...[
-            TextField(
-              controller: _otpController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'OTP',
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                final val = _otpController.value.text;
-
-                final otp = await sms.otp.verify(
-                  VerifyOtpPayload(token: _token!, otp: val),
-                );
-
-                if (otp != null) {
-                  setState(() {
-                    _token = null;
-                  });
-
-                  print("OTP VERIFIED");
-                }
-              },
-              child: const Text("VERIFY OTP"),
-            ),
-          ],
-          ElevatedButton(
-            onPressed: () async {
-              final list = await sms.campaign.list(
-                CampaignListPayload(senderId: "ID GOES HERE"),
-              );
-
-              box.put("CAMPAINS", list);
-
-              print(list);
-            },
-            child: const Text("CAMPAINS LIST"),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final list = await sms.contact.list();
-
-              print(list);
-            },
-            child: const Text("CONTACT LIST"),
           ),
         ],
       ),

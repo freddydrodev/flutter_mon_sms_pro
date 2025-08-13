@@ -1,15 +1,32 @@
-export 'contact_model.dart';
-export 'sender_model.dart';
-export 'otp_model.dart';
-export 'user_model.dart';
-export 'company_type_model.dart';
-export 'group_model.dart';
-export 'transaction_model.dart';
-export 'offer_model.dart';
-export 'template_model.dart';
-export 'version_model.dart';
-export 'follower_model.dart';
-export 'company_followed_model.dart';
-export 'import_model.dart';
+// CAMPAIGN RELATED
 export 'campaign/campaign_model.dart';
 export 'campaign/campaign_recurring_day_model.dart';
+
+// CONTACT RELATED
+export 'contact/contact_model.dart';
+
+// CORE RELATED
+export 'core/otp_model.dart';
+export 'core/user_model.dart';
+export 'core/offer_model.dart';
+export 'core/version_model.dart';
+export 'core/import_model.dart';
+
+// GROUP RELATED
+export 'group/group_model.dart';
+export 'group/group_contact_list_model.dart';
+export 'group/group_count_model.dart';
+
+// LEREZO RELATED
+export 'lerezo/follower_model.dart';
+export 'lerezo/company_followed_model.dart';
+export 'lerezo/company_type_model.dart';
+
+// SENDER RELATED
+export 'sender/sender_model.dart';
+
+// TEMPLATE RELATED
+export 'template/template_model.dart';
+
+// TRANSACTION RELATED
+export 'transaction/transaction_model.dart';
