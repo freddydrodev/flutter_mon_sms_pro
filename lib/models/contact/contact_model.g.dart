@@ -18,20 +18,16 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
     };
     return ContactModel(
       phone: fields[0] as String,
-      id: fields[1] as String?,
-      name: fields[2] as String?,
-      firstName: fields[3] as String?,
-      lastName: fields[4] as String?,
-      sex: fields[5] as SexType?,
-      groupIds:
-          fields[6] == null ? const [] : (fields[6] as List).cast<String>(),
+      id: fields[1] as String,
+      name: fields[2] as String,
+      createdAt: fields[3] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, ContactModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.phone)
       ..writeByte(1)
@@ -39,13 +35,7 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       ..writeByte(2)
       ..write(obj.name)
       ..writeByte(3)
-      ..write(obj.firstName)
-      ..writeByte(4)
-      ..write(obj.lastName)
-      ..writeByte(5)
-      ..write(obj.sex)
-      ..writeByte(6)
-      ..write(obj.groupIds);
+      ..write(obj.createdAt);
   }
 
   @override

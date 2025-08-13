@@ -5,19 +5,19 @@ part 'group_count_model.g.dart';
 @HiveType(typeId: 401)
 class GroupCountModel {
   @HiveField(0)
-  final int contactInGroups;
+  final int contacts;
 
-  GroupCountModel({required this.contactInGroups});
+  GroupCountModel({required this.contacts});
 
   factory GroupCountModel.fromJson(Map<String, dynamic> json) {
     return GroupCountModel(
-      contactInGroups: json['contactInGroups'],
+      contacts: json['contacts'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'contactInGroups': contactInGroups,
+      'contacts': contacts,
     };
   }
 }

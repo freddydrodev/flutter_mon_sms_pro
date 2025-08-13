@@ -1,5 +1,6 @@
 // CAMPAIGN RELATED
 export 'campaign/campaign_model.dart';
+export 'campaign/campaign_count_model.dart';
 export 'campaign/campaign_recurring_day_model.dart';
 
 // CONTACT RELATED
@@ -14,7 +15,6 @@ export 'core/import_model.dart';
 
 // GROUP RELATED
 export 'group/group_model.dart';
-export 'group/group_contact_list_model.dart';
 export 'group/group_count_model.dart';
 
 // LEREZO RELATED

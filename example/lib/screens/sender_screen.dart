@@ -20,6 +20,17 @@ class _SenderScreenState extends State<SenderScreen> {
 
     sms.sender.list().then((value) {
       localDB.put("SENDERS", value.data ?? []);
+    }).catchError((error) {
+      print("Error fetching senders: $error");
+      // Show error message to user
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Failed to load senders: ${error.toString()}"),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     });
   }
 

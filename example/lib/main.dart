@@ -1,8 +1,11 @@
 import 'package:example/screens/auth_screen.dart';
+import 'package:example/screens/contact_screen.dart';
+import 'package:example/screens/group_screen.dart';
 import 'package:example/screens/sender_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mon_sms_pro/mon_sms_pro.dart';
+// import 'package:mon_sms_pro/models/hive.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
 
 void main() async {
@@ -10,7 +13,11 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter();
+  await Hive.initFlutter(
+    "sms_example",
+    HiveStorageBackendPreference.native,
+    1,
+  );
 
   await initHiveAdapters();
 
@@ -34,6 +41,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/auth": (context) => const AuthScreen(),
         "/senders": (context) => const SenderScreen(),
+        "/contacts": (context) => const ContactScreen(),
+        "/groups": (context) => const GroupScreen(),
       },
     );
   }
@@ -58,7 +67,21 @@ class _MyHomePageState extends State<MyHomePage> {
       "title": "Sender Screen",
       "route": "/senders",
     },
+    {
+      "title": "Contact Screen",
+      "route": "/contacts",
+    },
+    {
+      "title": "Group Screen",
+      "route": "/groups",
+    },
   ];
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   localDB.clear();
+  // }
 
   @override
   Widget build(BuildContext context) {

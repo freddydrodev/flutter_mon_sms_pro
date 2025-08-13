@@ -31,6 +31,8 @@ class ContactApi {
       [ContactListPayload? payload]) async {
     final url = "$_baseUrl/contact/list";
 
+    debugPrint("flutter_mon_sms_pro/contact/list/url: $url");
+
     debugPrint(
         "flutter_mon_sms_pro/contact/list/payload: ${payload?.toJson()}");
 

@@ -1,5 +1,4 @@
 import 'package:hive_ce/hive.dart';
-import 'package:mon_sms_pro/models/utils.dart';
 
 part 'contact_model.g.dart';
 
@@ -8,26 +7,17 @@ class ContactModel {
   @HiveField(0)
   final String phone;
   @HiveField(1)
-  final String? id;
+  final String id;
   @HiveField(2)
-  final String? name;
+  final String name;
   @HiveField(3)
-  final String? firstName;
-  @HiveField(4)
-  final String? lastName;
-  @HiveField(5)
-  final SexType? sex; // M | F
-  @HiveField(6)
-  final List<String> groupIds;
+  final DateTime createdAt;
 
   ContactModel({
     required this.phone,
-    this.id,
-    this.name,
-    this.firstName,
-    this.lastName,
-    this.sex,
-    this.groupIds = const [],
+    required this.id,
+    required this.name,
+    required this.createdAt,
   });
 
   factory ContactModel.fromJson(Map<String, dynamic> json) {
@@ -35,12 +25,7 @@ class ContactModel {
       id: json['id'],
       phone: json['phone'],
       name: json['name'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      sex: json['sex'] != null
-          ? SexType.fromValue(json['sex'])
-          : null,
-      groupIds: List<String>.from(json['groupIds']),
+      createdAt: DateTime.parse(json['createdAt']),
     );
   }
 
@@ -49,10 +34,7 @@ class ContactModel {
       'id': id,
       'phone': phone,
       'name': name,
-      'firstName': firstName,
-      'lastName': lastName,
-      'sex': sex?.value,
-      'groupIds': groupIds
+      'createdAt': createdAt.toIso8601String(),
     };
   }
 }

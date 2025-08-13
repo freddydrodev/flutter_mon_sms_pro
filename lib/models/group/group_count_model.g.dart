@@ -17,7 +17,7 @@ class GroupCountModelAdapter extends TypeAdapter<GroupCountModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GroupCountModel(
-      contactInGroups: (fields[0] as num).toInt(),
+      contacts: (fields[0] as num).toInt(),
     );
   }
 
@@ -26,7 +26,7 @@ class GroupCountModelAdapter extends TypeAdapter<GroupCountModel> {
     writer
       ..writeByte(1)
       ..writeByte(0)
-      ..write(obj.contactInGroups);
+      ..write(obj.contacts);
   }
 
   @override
