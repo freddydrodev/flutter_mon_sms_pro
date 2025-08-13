@@ -8,7 +8,7 @@ part of 'contact_model.dart';
 
 class ContactModelAdapter extends TypeAdapter<ContactModel> {
   @override
-  final typeId = 2;
+  final typeId = 200;
 
   @override
   ContactModel read(BinaryReader reader) {

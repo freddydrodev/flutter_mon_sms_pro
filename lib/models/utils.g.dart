@@ -8,7 +8,7 @@ part of 'utils.dart';
 
 class CoordsAdapter extends TypeAdapter<Coords> {
   @override
-  final typeId = 0;
+  final typeId = 8;
 
   @override
   Coords read(BinaryReader reader) {
@@ -48,7 +48,7 @@ class CoordsAdapter extends TypeAdapter<Coords> {
 
 class LocationAdapter extends TypeAdapter<Location> {
   @override
-  final typeId = 14;
+  final typeId = 9;
 
   @override
   Location read(BinaryReader reader) {
@@ -85,7 +85,7 @@ class LocationAdapter extends TypeAdapter<Location> {
 
 class SMSTypeAdapter extends TypeAdapter<SMSType> {
   @override
-  final typeId = 7;
+  final typeId = 1;
 
   @override
   SMSType read(BinaryReader reader) {
@@ -130,7 +130,7 @@ class SMSTypeAdapter extends TypeAdapter<SMSType> {
 
 class SexTypeAdapter extends TypeAdapter<SexType> {
   @override
-  final typeId = 8;
+  final typeId = 2;
 
   @override
   SexType read(BinaryReader reader) {
@@ -167,7 +167,7 @@ class SexTypeAdapter extends TypeAdapter<SexType> {
 
 class CountryAdapter extends TypeAdapter<Country> {
   @override
-  final typeId = 9;
+  final typeId = 3;
 
   @override
   Country read(BinaryReader reader) {
@@ -200,7 +200,7 @@ class CountryAdapter extends TypeAdapter<Country> {
 
 class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
   @override
-  final typeId = 10;
+  final typeId = 4;
 
   @override
   TransactionType read(BinaryReader reader) {
@@ -237,7 +237,7 @@ class TransactionTypeAdapter extends TypeAdapter<TransactionType> {
 
 class TransactionStatusAdapter extends TypeAdapter<TransactionStatus> {
   @override
-  final typeId = 11;
+  final typeId = 5;
 
   @override
   TransactionStatus read(BinaryReader reader) {
@@ -278,7 +278,7 @@ class TransactionStatusAdapter extends TypeAdapter<TransactionStatus> {
 
 class PaymentMethodAdapter extends TypeAdapter<PaymentMethod> {
   @override
-  final typeId = 12;
+  final typeId = 6;
 
   @override
   PaymentMethod read(BinaryReader reader) {
@@ -335,7 +335,7 @@ class PaymentMethodAdapter extends TypeAdapter<PaymentMethod> {
 
 class OfferNameAdapter extends TypeAdapter<OfferName> {
   @override
-  final typeId = 13;
+  final typeId = 7;
 
   @override
   OfferName read(BinaryReader reader) {

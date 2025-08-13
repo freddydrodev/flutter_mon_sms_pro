@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'utils.g.dart';
 
-@HiveType(typeId: 7)
+@HiveType(typeId: 1)
 enum SMSType {
   @HiveField(0)
   sms('SMS'),
@@ -16,9 +16,17 @@ enum SMSType {
   const SMSType(this.value);
 
   final String value;
+
+  static SMSType fromValue(String value) {
+    return SMSType.values.firstWhere(
+      (type) => type.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 8)
+@HiveType(typeId: 2)
 enum SexType {
   @HiveField(0)
   m('M'),
@@ -28,9 +36,17 @@ enum SexType {
   const SexType(this.value);
 
   final String value;
+
+  static SexType fromValue(String value) {
+    return SexType.values.firstWhere(
+      (sex) => sex.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 9)
+@HiveType(typeId: 3)
 enum Country {
   @HiveField(0)
   ci('CI');
@@ -38,9 +54,17 @@ enum Country {
   const Country(this.value);
 
   final String value;
+
+  static Country fromValue(String value) {
+    return Country.values.firstWhere(
+      (country) => country.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 10)
+@HiveType(typeId: 4)
 enum TransactionType {
   @HiveField(0)
   debited('DEBITED'),
@@ -50,9 +74,17 @@ enum TransactionType {
   const TransactionType(this.value);
 
   final String value;
+
+  static TransactionType fromValue(String value) {
+    return TransactionType.values.firstWhere(
+      (type) => type.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 11)
+@HiveType(typeId: 5)
 enum TransactionStatus {
   @HiveField(0)
   pending('PENDING'),
@@ -64,9 +96,17 @@ enum TransactionStatus {
   const TransactionStatus(this.value);
 
   final String value;
+
+  static TransactionStatus fromValue(String value) {
+    return TransactionStatus.values.firstWhere(
+      (status) => status.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 12)
+@HiveType(typeId: 6)
 enum PaymentMethod {
   @HiveField(0)
   omCi('OM_CI'),
@@ -86,9 +126,17 @@ enum PaymentMethod {
   const PaymentMethod(this.value);
 
   final String value;
+
+  static PaymentMethod fromValue(String value) {
+    return PaymentMethod.values.firstWhere(
+      (method) => method.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 13)
+@HiveType(typeId: 7)
 enum OfferName {
   @HiveField(0)
   starter('STARTER'),
@@ -106,9 +154,17 @@ enum OfferName {
   const OfferName(this.value);
 
   final String value;
+
+  static OfferName fromValue(String value) {
+    return OfferName.values.firstWhere(
+      (offer) => offer.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 8)
 class Coords {
   @HiveField(0)
   final double lon;
@@ -140,7 +196,7 @@ class Coords {
   }
 }
 
-@HiveType(typeId: 14)
+@HiveType(typeId: 9)
 class Location {
   @HiveField(0)
   final double lon;

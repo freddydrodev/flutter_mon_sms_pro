@@ -1,9 +1,9 @@
 import 'package:hive_ce/hive.dart';
-import 'package:mon_sms_pro/utils.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 part 'offer_model.g.dart';
 
-@HiveType(typeId: 19)
+@HiveType(typeId: 301)
 class OfferModel {
   @HiveField(0)
   final String? id;
@@ -27,7 +27,7 @@ class OfferModel {
   factory OfferModel.fromJson(Map<String, dynamic> json) {
     return OfferModel(
       id: json['id'],
-      name: OfferName.values.firstWhere((e) => e.value == json['name']),
+      name: OfferName.fromValue(json['name']),
       price: json['price'],
       credit: json['credit'],
       createdAt: DateTime.parse(json['createdAt']),

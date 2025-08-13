@@ -1,7 +1,7 @@
 import 'package:mon_sms_pro/models/models.dart';
 import 'package:mon_sms_pro/payload/core/base_payload.dart';
 import 'package:mon_sms_pro/payload/core/list_payload.dart';
-import 'package:mon_sms_pro/utils.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 enum ContactOrderBy {
   type("type"),

@@ -3,6 +3,7 @@
 // Check in to version control
 
 import 'package:hive_ce/hive.dart';
+import 'package:mon_sms_pro/models/campaign/campaign_count_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_recurring_day_model.dart';
 import 'package:mon_sms_pro/models/contact/contact_model.dart';
@@ -20,10 +21,11 @@ import 'package:mon_sms_pro/models/lerezo/follower_model.dart';
 import 'package:mon_sms_pro/models/sender/sender_model.dart';
 import 'package:mon_sms_pro/models/template/template_model.dart';
 import 'package:mon_sms_pro/models/transaction/transaction_model.dart';
-import 'package:mon_sms_pro/utils.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
+    registerAdapter(CampaignCountModelAdapter());
     registerAdapter(CampaignModelAdapter());
     registerAdapter(CampaignRecurringDayModelAdapter());
     registerAdapter(CompanyFollowedModelAdapter());
@@ -57,6 +59,7 @@ extension HiveRegistrar on HiveInterface {
 
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
+    registerAdapter(CampaignCountModelAdapter());
     registerAdapter(CampaignModelAdapter());
     registerAdapter(CampaignRecurringDayModelAdapter());
     registerAdapter(CompanyFollowedModelAdapter());

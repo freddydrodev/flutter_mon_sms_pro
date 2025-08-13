@@ -13,14 +13,14 @@ class ApiResponseModel<T> {
 
   factory ApiResponseModel.fromJson(
     Map<String, dynamic> json,
-    T Function(Map<String, dynamic>)? fromJsonT,
+    T Function(dynamic)? fromJsonT,
   ) {
     return ApiResponseModel(
       success: json['success'] as bool,
       error: json['error'] as String?,
       data: json['data'] != null
           ? fromJsonT != null
-              ? fromJsonT(json['data'] as Map<String, dynamic>)
+              ? fromJsonT(json['data'])
               : json['data'] as T
           : null,
       isZodError: json['isZodError'] as bool? ?? false,

@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'company_type_model.g.dart';
 
-@HiveType(typeId: 16)
+@HiveType(typeId: 501)
 class CompanyTypeModel {
   @HiveField(0)
   final String? id;

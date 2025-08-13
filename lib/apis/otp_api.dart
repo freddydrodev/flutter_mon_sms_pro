@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/models.dart';
 import 'package:mon_sms_pro/payload/otp_payload.dart';
@@ -29,18 +30,19 @@ class OtpApi {
   Future<ApiResponseModel<OTPModel?>> get(GetOtpPayload payload) async {
     final url = "$_baseUrl/auth/otp/get";
 
-    print("flutter_mon_sms_pro/otp/get/url: $url");
+    debugPrint("flutter_mon_sms_pro/otp/get/url: $url");
 
-    print("flutter_mon_sms_pro/otp/get/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/otp/get/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/otp/get/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/otp/get/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, OTPModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => OTPModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }
@@ -52,16 +54,17 @@ class OtpApi {
   Future<ApiResponseModel<OTPModel?>> verify(VerifyOtpPayload payload) async {
     final url = "$_baseUrl/auth/otp/verify";
 
-    print("flutter_mon_sms_pro/otp/verify/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/otp/verify/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/otp/verify/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/otp/verify/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, OTPModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => OTPModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }

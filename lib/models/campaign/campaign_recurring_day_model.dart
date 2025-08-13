@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'campaign_recurring_day_model.g.dart';
 
-@HiveType(typeId: 25)
+@HiveType(typeId: 102)
 class CampaignRecurringDayModel {
   @HiveField(0)
   final String? id;

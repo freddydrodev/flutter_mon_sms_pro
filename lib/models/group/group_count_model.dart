@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'group_count_model.g.dart';
 
-@HiveType(typeId: 171)
+@HiveType(typeId: 401)
 class GroupCountModel {
   @HiveField(0)
   final int contactInGroups;

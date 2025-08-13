@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/models.dart';
 import 'package:mon_sms_pro/payload/contact_payload.dart';
@@ -30,18 +31,21 @@ class ContactApi {
       [ContactListPayload? payload]) async {
     final url = "$_baseUrl/contact/list";
 
-    print("flutter_mon_sms_pro/contact/list/payload: ${payload?.toJson()}");
+    debugPrint(
+        "flutter_mon_sms_pro/contact/list/payload: ${payload?.toJson()}");
 
     final r = await _dio.post(url, data: {
       if (payload != null) ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/contact/list/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/contact/list/data: ${r.data}");
 
     final response = ApiResponseModel.fromJson(
       r.data,
-      (json) => (json as List).map((e) => ContactModel.fromJson(e)).toList(),
+      (data) => (data as List<dynamic>)
+          .map((e) => ContactModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
     return response;
@@ -55,16 +59,18 @@ class ContactApi {
       CreateContactPayload payload) async {
     final url = "$_baseUrl/contact/create";
 
-    print("flutter_mon_sms_pro/contact/create/payload: ${payload.toJson()}");
+    debugPrint(
+        "flutter_mon_sms_pro/contact/create/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/contact/create/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/contact/create/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, ContactModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => ContactModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }
@@ -76,16 +82,17 @@ class ContactApi {
   Future<ApiResponseModel<void>> delete(DeleteContactPayload payload) async {
     final url = "$_baseUrl/contact/delete";
 
-    print("flutter_mon_sms_pro/contact/delete/payload: ${payload.toJson()}");
+    debugPrint(
+        "flutter_mon_sms_pro/contact/delete/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/contact/delete/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/contact/delete/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, (json) => null);
+    final response = ApiResponseModel.fromJson(r.data, (data) => null);
 
     return response;
   }
@@ -97,16 +104,17 @@ class ContactApi {
   Future<ApiResponseModel<ContactModel?>> get(GetContactPayload payload) async {
     final url = "$_baseUrl/contact/${payload.id}";
 
-    print("flutter_mon_sms_pro/contact/get/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/contact/get/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/contact/get/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/contact/get/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, ContactModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => ContactModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }
@@ -119,16 +127,18 @@ class ContactApi {
       GetContactPayload payload) async {
     final url = "$_baseUrl/contact/${payload.id}/update";
 
-    print("flutter_mon_sms_pro/contact/update/payload: ${payload.toJson()}");
+    debugPrint(
+        "flutter_mon_sms_pro/contact/update/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/contact/update/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/contact/update/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, ContactModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => ContactModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }

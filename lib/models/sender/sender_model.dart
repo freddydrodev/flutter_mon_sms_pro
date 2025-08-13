@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'sender_model.g.dart';
 
-@HiveType(typeId: 5)
+@HiveType(typeId: 600)
 enum SenderStatus {
   @HiveField(0)
   pending("PENDING"),
@@ -16,33 +16,41 @@ enum SenderStatus {
   final String value;
 
   const SenderStatus(this.value);
+
+  static SenderStatus fromValue(String value) {
+    return SenderStatus.values.firstWhere(
+      (status) => status.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 6)
+@HiveType(typeId: 601)
 class SenderModel {
   @HiveField(0)
-  final String? id;
+  final String id;
   @HiveField(1)
   final String name;
   @HiveField(2)
-  final String description;
+  final String? description;
   @HiveField(3)
   final SenderStatus status;
   @HiveField(4)
-  final bool archived;
+  final bool? archived;
   @HiveField(5)
   final DateTime createdAt;
   @HiveField(6)
-  final String userId;
+  final String? userId;
 
   SenderModel({
-    this.id,
+    required this.id,
     required this.name,
-    required this.description,
     required this.status,
-    required this.archived,
     required this.createdAt,
-    required this.userId,
+    this.description,
+    this.archived = false,
+    this.userId,
   });
 
   factory SenderModel.fromJson(Map<String, dynamic> json) {
@@ -50,7 +58,7 @@ class SenderModel {
       id: json['id'],
       name: json['name'],
       description: json['description'],
-      status: SenderStatus.values.byName(json['status']),
+      status: SenderStatus.fromValue(json['status']),
       archived: json['archived'],
       createdAt: DateTime.parse(json['createdAt']),
       userId: json['userId'],

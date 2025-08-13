@@ -8,7 +8,7 @@ part of 'follower_model.dart';
 
 class FollowerModelAdapter extends TypeAdapter<FollowerModel> {
   @override
-  final typeId = 22;
+  final typeId = 502;
 
   @override
   FollowerModel read(BinaryReader reader) {

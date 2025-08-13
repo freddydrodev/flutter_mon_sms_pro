@@ -1,9 +1,9 @@
 import 'package:hive_ce/hive.dart';
-import 'package:mon_sms_pro/utils.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 part 'user_model.g.dart';
 
-@HiveType(typeId: 15)
+@HiveType(typeId: 304)
 class UserModel {
   @HiveField(0)
   final String? id;
@@ -84,9 +84,8 @@ class UserModel {
       description: json['description'],
       address: json['address'],
       city: json['city'],
-      country: json['country'] != null
-          ? Country.values.firstWhere((e) => e.value == json['country'])
-          : null,
+      country:
+          json['country'] != null ? Country.fromValue(json['country']) : null,
     );
   }
 

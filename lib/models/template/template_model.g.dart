@@ -8,7 +8,7 @@ part of 'template_model.dart';
 
 class TemplateModelAdapter extends TypeAdapter<TemplateModel> {
   @override
-  final typeId = 20;
+  final typeId = 700;
 
   @override
   TemplateModel read(BinaryReader reader) {

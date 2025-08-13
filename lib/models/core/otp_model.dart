@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'otp_model.g.dart';
 
-@HiveType(typeId: 3)
+@HiveType(typeId: 302)
 enum OTPStatus {
   @HiveField(0)
   pending("PENDING"),
@@ -14,9 +14,17 @@ enum OTPStatus {
   final String value;
 
   const OTPStatus(this.value);
+
+  static OTPStatus fromValue(String value) {
+    return OTPStatus.values.firstWhere(
+      (status) => status.value == value,
+      orElse: () =>
+          throw ArgumentError('No enum value with that value: $value'),
+    );
+  }
 }
 
-@HiveType(typeId: 4)
+@HiveType(typeId: 303)
 class OTPModel {
   @HiveField(0)
   final String token;
@@ -37,7 +45,7 @@ class OTPModel {
     return OTPModel(
       token: json['token'],
       phoneNumber: json['phoneNumber'],
-      status: OTPStatus.values.firstWhere((e) => e.value == json['status']),
+      status: OTPStatus.fromValue(json['status']),
     );
   }
 

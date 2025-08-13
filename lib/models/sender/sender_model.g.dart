@@ -8,7 +8,7 @@ part of 'sender_model.dart';
 
 class SenderModelAdapter extends TypeAdapter<SenderModel> {
   @override
-  final typeId = 6;
+  final typeId = 601;
 
   @override
   SenderModel read(BinaryReader reader) {
@@ -17,13 +17,13 @@ class SenderModelAdapter extends TypeAdapter<SenderModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SenderModel(
-      id: fields[0] as String?,
+      id: fields[0] as String,
       name: fields[1] as String,
-      description: fields[2] as String,
       status: fields[3] as SenderStatus,
-      archived: fields[4] as bool,
       createdAt: fields[5] as DateTime,
-      userId: fields[6] as String,
+      description: fields[2] as String?,
+      archived: fields[4] == null ? false : fields[4] as bool?,
+      userId: fields[6] as String?,
     );
   }
 
@@ -60,7 +60,7 @@ class SenderModelAdapter extends TypeAdapter<SenderModel> {
 
 class SenderStatusAdapter extends TypeAdapter<SenderStatus> {
   @override
-  final typeId = 5;
+  final typeId = 600;
 
   @override
   SenderStatus read(BinaryReader reader) {

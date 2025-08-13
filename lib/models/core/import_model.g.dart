@@ -8,7 +8,7 @@ part of 'import_model.dart';
 
 class ImportModelAdapter extends TypeAdapter<ImportModel> {
   @override
-  final typeId = 24;
+  final typeId = 300;
 
   @override
   ImportModel read(BinaryReader reader) {

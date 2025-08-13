@@ -8,7 +8,7 @@ part of 'offer_model.dart';
 
 class OfferModelAdapter extends TypeAdapter<OfferModel> {
   @override
-  final typeId = 19;
+  final typeId = 301;
 
   @override
   OfferModel read(BinaryReader reader) {

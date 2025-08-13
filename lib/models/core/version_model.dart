@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'version_model.g.dart';
 
-@HiveType(typeId: 21)
+@HiveType(typeId: 305)
 class VersionModel {
   @HiveField(0)
   final String? id;

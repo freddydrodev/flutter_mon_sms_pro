@@ -1,4 +1,5 @@
 import 'package:example/screens/auth_screen.dart';
+import 'package:example/screens/sender_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mon_sms_pro/mon_sms_pro.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(title: 'Mon SMS Pro Library Demo'),
       routes: {
         "/auth": (context) => const AuthScreen(),
+        "/senders": (context) => const SenderScreen(),
       },
     );
   }
@@ -47,6 +49,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final routes = const [
+    {
+      "title": "Auth Screen",
+      "route": "/auth",
+    },
+    {
+      "title": "Sender Screen",
+      "route": "/senders",
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,12 +69,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(
         children: [
-          ListTile(
-            title: const Text("Auth Screen"),
-            onTap: () {
-              Navigator.pushNamed(context, "/auth");
-            },
-          ),
+          ...routes.map((route) => ListTile(
+                title: Text(route["title"]!),
+                onTap: () {
+                  Navigator.pushNamed(context, route["route"]!);
+                },
+              )),
         ],
       ),
     );

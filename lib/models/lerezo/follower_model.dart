@@ -1,9 +1,9 @@
 import 'package:hive_ce/hive.dart';
-import 'package:mon_sms_pro/utils.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 part 'follower_model.g.dart';
 
-@HiveType(typeId: 22)
+@HiveType(typeId: 502)
 class FollowerModel {
   @HiveField(0)
   final String? id;
@@ -51,7 +51,7 @@ class FollowerModel {
           json['location'] != null ? Location.fromJson(json['location']) : null,
       notificationToken: json['notificationToken'],
       country: json['country'] != null
-          ? Country.values.firstWhere((e) => e.value == json['country'])
+          ? Country.fromValue(json['country'])
           : null,
       createdAt: DateTime.parse(json['createdAt']),
     );

@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'template_model.g.dart';
 
-@HiveType(typeId: 20)
+@HiveType(typeId: 700)
 class TemplateModel {
   @HiveField(0)
   final String? id;

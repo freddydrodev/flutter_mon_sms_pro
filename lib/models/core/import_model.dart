@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 
 part 'import_model.g.dart';
 
-@HiveType(typeId: 24)
+@HiveType(typeId: 300)
 class ImportModel {
   @HiveField(0)
   final String? id;

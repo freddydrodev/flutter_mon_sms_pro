@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/models.dart';
 import 'package:mon_sms_pro/payload/sender_payload.dart';
@@ -30,18 +31,20 @@ class SenderApi {
       [SenderListPayload? payload]) async {
     final url = "$_baseUrl/sender/list";
 
-    print("flutter_mon_sms_pro/sender/list/payload: ${payload?.toJson()}");
+    debugPrint("flutter_mon_sms_pro/sender/list/payload: ${payload?.toJson()}");
 
     final r = await _dio.post(url, data: {
       if (payload != null) ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/sender/list/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/sender/list/data: ${r.data}");
 
     final response = ApiResponseModel.fromJson(
       r.data,
-      (json) => (json as List).map((e) => SenderModel.fromJson(e)).toList(),
+      (data) => (data as List<dynamic>)
+          .map((e) => SenderModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
     return response;
@@ -55,16 +58,18 @@ class SenderApi {
       CreateSenderPayload payload) async {
     final url = "$_baseUrl/sender/create";
 
-    print("flutter_mon_sms_pro/sender/create/payload: ${payload.toJson()}");
+    debugPrint(
+        "flutter_mon_sms_pro/sender/create/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/sender/create/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/sender/create/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, SenderModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => SenderModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }
@@ -76,16 +81,17 @@ class SenderApi {
   Future<ApiResponseModel<SenderModel?>> get(GetSenderPayload payload) async {
     final url = "$_baseUrl/sender/${payload.id}";
 
-    print("flutter_mon_sms_pro/sender/get/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/sender/get/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/sender/get/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/sender/get/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, SenderModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => SenderModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }
@@ -98,16 +104,18 @@ class SenderApi {
       GetSenderPayload payload) async {
     final url = "$_baseUrl/sender/${payload.id}/update";
 
-    print("flutter_mon_sms_pro/sender/update/payload: ${payload.toJson()}");
+    debugPrint(
+        "flutter_mon_sms_pro/sender/update/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/sender/update/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/sender/update/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, SenderModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => SenderModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }

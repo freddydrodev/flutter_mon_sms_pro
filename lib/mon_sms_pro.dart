@@ -9,7 +9,7 @@ import 'package:mon_sms_pro/apis/sender_api.dart';
 
 export 'package:mon_sms_pro/payload/payload.dart';
 export 'package:mon_sms_pro/models/models.dart';
-export 'package:mon_sms_pro/hive.dart';
+export 'package:mon_sms_pro/models/hive.dart';
 
 class MonSMSPRO {
   Dio get _dio => Dio();

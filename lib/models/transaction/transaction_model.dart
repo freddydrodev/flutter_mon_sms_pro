@@ -1,9 +1,9 @@
 import 'package:hive_ce/hive.dart';
-import 'package:mon_sms_pro/utils.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 part 'transaction_model.g.dart';
 
-@HiveType(typeId: 18)
+@HiveType(typeId: 800)
 class TransactionModel {
   @HiveField(0)
   final String? id;
@@ -45,11 +45,9 @@ class TransactionModel {
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
     return TransactionModel(
       id: json['id'],
-      type: TransactionType.values.firstWhere((e) => e.value == json['type']),
-      status:
-          TransactionStatus.values.firstWhere((e) => e.value == json['status']),
-      paymentMethod: PaymentMethod.values
-          .firstWhere((e) => e.value == json['paymentMethod']),
+      type: TransactionType.fromValue(json['type']),
+      status: TransactionStatus.fromValue(json['status']),
+      paymentMethod: PaymentMethod.fromValue(json['paymentMethod']),
       token: json['token'],
       credit: json['credit'],
       price: json['price'] ?? 0,

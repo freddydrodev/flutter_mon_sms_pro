@@ -68,7 +68,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     _token = null;
                   });
 
-                  print("OTP VERIFIED");
+                  debugPrint("OTP VERIFIED");
                 }
               },
               child: const Text("VERIFY OTP"),

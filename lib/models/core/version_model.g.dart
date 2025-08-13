@@ -8,7 +8,7 @@ part of 'version_model.dart';
 
 class VersionModelAdapter extends TypeAdapter<VersionModel> {
   @override
-  final typeId = 21;
+  final typeId = 305;
 
   @override
   VersionModel read(BinaryReader reader) {

@@ -9,7 +9,7 @@ part of 'campaign_recurring_day_model.dart';
 class CampaignRecurringDayModelAdapter
     extends TypeAdapter<CampaignRecurringDayModel> {
   @override
-  final typeId = 25;
+  final typeId = 102;
 
   @override
   CampaignRecurringDayModel read(BinaryReader reader) {

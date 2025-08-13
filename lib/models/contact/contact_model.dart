@@ -1,9 +1,9 @@
 import 'package:hive_ce/hive.dart';
-import 'package:mon_sms_pro/utils.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 part 'contact_model.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 200)
 class ContactModel {
   @HiveField(0)
   final String phone;
@@ -38,7 +38,7 @@ class ContactModel {
       firstName: json['firstName'],
       lastName: json['lastName'],
       sex: json['sex'] != null
-          ? SexType.values.firstWhere((e) => e.value == json['sex'])
+          ? SexType.fromValue(json['sex'])
           : null,
       groupIds: List<String>.from(json['groupIds']),
     );

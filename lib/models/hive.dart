@@ -1,6 +1,6 @@
 import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/models.dart';
-import 'package:mon_sms_pro/utils.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 Future initHiveAdapters() async {
   // Utility Types and Enums

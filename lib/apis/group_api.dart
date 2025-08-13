@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/models.dart';
 import 'package:mon_sms_pro/payload/group_payload.dart';
@@ -30,18 +31,20 @@ class GroupApi {
       [GroupListPayload? payload]) async {
     final url = "$_baseUrl/group/list";
 
-    print("flutter_mon_sms_pro/group/list/payload: ${payload?.toJson()}");
+    debugPrint("flutter_mon_sms_pro/group/list/payload: ${payload?.toJson()}");
 
     final r = await _dio.post(url, data: {
       if (payload != null) ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/group/list/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/group/list/data: ${r.data}");
 
     final response = ApiResponseModel.fromJson(
       r.data,
-      (json) => (json as List).map((e) => GroupModel.fromJson(e)).toList(),
+      (data) => (data as List<dynamic>)
+          .map((e) => GroupModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
     return response;
@@ -55,16 +58,17 @@ class GroupApi {
       CreateGroupPayload payload) async {
     final url = "$_baseUrl/group/create";
 
-    print("flutter_mon_sms_pro/group/create/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/group/create/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/group/create/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/group/create/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, GroupModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => GroupModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }
@@ -76,16 +80,16 @@ class GroupApi {
   Future<ApiResponseModel<void>> delete(DeleteGroupPayload payload) async {
     final url = "$_baseUrl/group/delete";
 
-    print("flutter_mon_sms_pro/group/delete/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/group/delete/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/group/delete/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/group/delete/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, (json) => null);
+    final response = ApiResponseModel.fromJson(r.data, (data) => null);
 
     return response;
   }
@@ -97,16 +101,17 @@ class GroupApi {
   Future<ApiResponseModel<GroupModel?>> get(GetGroupPayload payload) async {
     final url = "$_baseUrl/group/${payload.id}";
 
-    print("flutter_mon_sms_pro/group/get/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/group/get/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/group/get/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/group/get/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, GroupModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => GroupModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }
@@ -119,16 +124,17 @@ class GroupApi {
       UpdateGroupPayload payload) async {
     final url = "$_baseUrl/group/${payload.id}/update";
 
-    print("flutter_mon_sms_pro/group/update/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/group/update/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/group/update/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/group/update/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, GroupModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => GroupModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }

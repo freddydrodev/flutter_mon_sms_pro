@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
 import 'package:mon_sms_pro/payload/campaign_payload.dart';
@@ -30,18 +31,21 @@ class CampaignApi {
       CampaignListPayload payload) async {
     final url = "$_baseUrl/sender/${payload.senderId}/campaign";
 
-    print("flutter_mon_sms_pro/campaign/list/payload: ${payload.toJson()}");
+    debugPrint(
+        "flutter_mon_sms_pro/campaign/list/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/campaign/list/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/campaign/list/data: ${r.data}");
 
     final response = ApiResponseModel.fromJson(
       r.data,
-      (json) => (json as List).map((e) => CampaignModel.fromJson(e)).toList(),
+      (data) => (data as List<dynamic>)
+          .map((e) => CampaignModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
     return response;
@@ -55,16 +59,18 @@ class CampaignApi {
       CreateCampaignPayload payload) async {
     final url = "$_baseUrl/campaign/create";
 
-    print("flutter_mon_sms_pro/campaign/create/payload: ${payload.toJson()}");
+    debugPrint(
+        "flutter_mon_sms_pro/campaign/create/payload: ${payload.toJson()}");
 
     final r = await _dio.post(url, data: {
       ...payload.toJson(),
       "apiKey": _apiKey,
     });
 
-    print("flutter_mon_sms_pro/campaign/create/data: ${r.data}");
+    debugPrint("flutter_mon_sms_pro/campaign/create/data: ${r.data}");
 
-    final response = ApiResponseModel.fromJson(r.data, CampaignModel.fromJson);
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => CampaignModel.fromJson(data as Map<String, dynamic>));
 
     return response;
   }

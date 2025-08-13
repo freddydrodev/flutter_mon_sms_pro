@@ -8,7 +8,7 @@ part of 'group_contact_list_model.dart';
 
 class GroupContactListModelAdapter extends TypeAdapter<GroupContactListModel> {
   @override
-  final typeId = 172;
+  final typeId = 400;
 
   @override
   GroupContactListModel read(BinaryReader reader) {

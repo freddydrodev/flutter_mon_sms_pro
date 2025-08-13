@@ -4,7 +4,7 @@ import 'package:mon_sms_pro/models/group/group_count_model.dart';
 
 part 'group_model.g.dart';
 
-@HiveType(typeId: 17)
+@HiveType(typeId: 402)
 class GroupModel {
   @HiveField(0)
   final String? id;
