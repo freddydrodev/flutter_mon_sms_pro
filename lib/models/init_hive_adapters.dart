@@ -1,7 +1,7 @@
 import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:mon_sms_pro/models/hive_registrar.dart';
 
-Future<void> initHiveAdapters() async {
+Future<void> initMonSMSProHiveAdapters() async {
   await Hive.initFlutter();
 
   // Register all enum adapters first

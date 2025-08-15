@@ -13,7 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Initialize Hive adapters
-  await initHiveAdapters();
+  await initMonSMSProHiveAdapters();
 
   // Open the main box
   await Hive.openBox('SMS_EXAMPLE');
