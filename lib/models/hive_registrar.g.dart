@@ -551,8 +551,11 @@ class GroupModelAdapter extends TypeAdapter<GroupModel> {
       id: fields[0] as String? ?? '',
       name: fields[1] as String,
       createdAt: fields[2] as DateTime,
-      count: fields[3] as GroupCountModel? ?? GroupCountModel(contacts: 0),
-      contacts: (fields[4] as List?)?.cast<ContactModel>() ?? [],
+      count: fields[3] == null
+          ? GroupCountModel(contacts: 0)
+          : fields[3] as GroupCountModel,
+      contacts:
+          fields[4] == null ? [] : (fields[4] as List).cast<ContactModel>(),
     );
   }
 
