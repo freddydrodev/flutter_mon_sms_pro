@@ -1,7 +1,7 @@
 import 'package:hive_ce/hive.dart';
 
 class CampaignRecurringDayModel extends HiveObject {
-  final String? id;
+  final String id;
   final bool enabled;
   final DateTime? monday;
   final DateTime? tuesday;
@@ -13,7 +13,7 @@ class CampaignRecurringDayModel extends HiveObject {
   final String campaignId;
 
   CampaignRecurringDayModel({
-    this.id,
+    required this.id,
     this.enabled = true,
     this.monday,
     this.tuesday,

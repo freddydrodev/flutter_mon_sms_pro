@@ -48,7 +48,7 @@ All model classes extend `HiveObject` and don't require manual `@HiveType` or `@
 import 'package:hive_ce/hive.dart';
 
 class UserModel extends HiveObject {
-  final String? id;
+  final String id;
   final String fullName;
   // ... other fields
 

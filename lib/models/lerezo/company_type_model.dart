@@ -1,12 +1,12 @@
 import 'package:hive_ce/hive.dart';
 
 class CompanyTypeModel extends HiveObject {
-  final String? id;
+  final String id;
   final String name;
   final DateTime createdAt;
 
   CompanyTypeModel({
-    this.id,
+    required this.id,
     required this.name,
     required this.createdAt,
   });

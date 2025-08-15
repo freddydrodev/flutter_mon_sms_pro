@@ -1,13 +1,13 @@
 import 'package:hive_ce/hive.dart';
 
 class CompanyFollowedModel extends HiveObject {
-  final String? id;
+  final String id;
   final String companyId;
   final String followerId;
   final DateTime createdAt;
 
   CompanyFollowedModel({
-    this.id,
+    required this.id,
     required this.companyId,
     required this.followerId,
     required this.createdAt,

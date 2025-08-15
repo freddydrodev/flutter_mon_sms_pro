@@ -1,13 +1,13 @@
 import 'package:hive_ce/hive.dart';
 
 class TemplateModel extends HiveObject {
-  final String? id;
+  final String id;
   final String text;
   final DateTime createdAt;
   final String userId;
 
   TemplateModel({
-    this.id,
+    required this.id,
     required this.text,
     required this.createdAt,
     required this.userId,

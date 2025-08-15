@@ -2,14 +2,14 @@ import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
 class OfferModel extends HiveObject {
-  final String? id;
+  final String id;
   final OfferName name;
   final int price;
   final int credit;
   final DateTime createdAt;
 
   OfferModel({
-    this.id,
+    required this.id,
     required this.name,
     required this.price,
     required this.credit,

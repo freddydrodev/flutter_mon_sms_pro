@@ -187,7 +187,7 @@ class CampaignRecurringDayModelAdapter
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CampaignRecurringDayModel(
-      id: fields[0] as String?,
+      id: fields[0] as String,
       enabled: fields[1] == null ? true : fields[1] as bool,
       monday: fields[2] as DateTime?,
       tuesday: fields[3] as DateTime?,
@@ -291,7 +291,7 @@ class ImportModelAdapter extends TypeAdapter<ImportModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ImportModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       userId: fields[1] as String,
       createdAt: fields[2] as DateTime,
     );
@@ -331,7 +331,7 @@ class OfferModelAdapter extends TypeAdapter<OfferModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return OfferModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       name: fields[1] as OfferName,
       price: (fields[2] as num).toInt(),
       credit: (fields[3] as num).toInt(),
@@ -417,7 +417,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return UserModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       emailAddress: fields[1] as String?,
       phoneNumber: fields[2] as String,
       password: fields[3] as String?,
@@ -502,7 +502,7 @@ class VersionModelAdapter extends TypeAdapter<VersionModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return VersionModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       name: fields[1] as String,
       description: fields[2] as String,
       isMajorRelease: fields[3] as bool,
@@ -548,11 +548,11 @@ class GroupModelAdapter extends TypeAdapter<GroupModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GroupModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       name: fields[1] as String,
       createdAt: fields[2] as DateTime,
-      count: fields[3] as GroupCountModel?,
-      contacts: (fields[4] as List?)?.cast<ContactModel>(),
+      count: fields[3] as GroupCountModel? ?? GroupCountModel(contacts: 0),
+      contacts: (fields[4] as List?)?.cast<ContactModel>() ?? [],
     );
   }
 
@@ -628,7 +628,7 @@ class CompanyFollowedModelAdapter extends TypeAdapter<CompanyFollowedModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CompanyFollowedModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       companyId: fields[1] as String,
       followerId: fields[2] as String,
       createdAt: fields[3] as DateTime,
@@ -671,7 +671,7 @@ class CompanyTypeModelAdapter extends TypeAdapter<CompanyTypeModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CompanyTypeModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       name: fields[1] as String,
       createdAt: fields[2] as DateTime,
     );
@@ -711,7 +711,7 @@ class FollowerModelAdapter extends TypeAdapter<FollowerModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return FollowerModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       phoneNumber: fields[1] as String,
       password: fields[2] as String?,
       name: fields[3] as String,
@@ -824,7 +824,7 @@ class TemplateModelAdapter extends TypeAdapter<TemplateModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TemplateModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       text: fields[1] as String,
       createdAt: fields[2] as DateTime,
       userId: fields[3] as String,
@@ -867,7 +867,7 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TransactionModel(
-      id: fields[0] as String?,
+      id: fields[0] as String? ?? '',
       type: fields[1] as TransactionType,
       status: fields[2] as TransactionStatus,
       paymentMethod: fields[3] as PaymentMethod,

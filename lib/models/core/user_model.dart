@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
 class UserModel extends HiveObject {
-  final String? id;
+  final String id;
   final String? emailAddress;
   final String phoneNumber;
   final String? password;
@@ -22,7 +22,7 @@ class UserModel extends HiveObject {
   final Country? country;
 
   UserModel({
-    this.id,
+    required this.id,
     this.emailAddress,
     required this.phoneNumber,
     this.password,
