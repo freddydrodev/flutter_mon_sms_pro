@@ -16,7 +16,7 @@ class _CampaignScreenState extends State<CampaignScreen> {
   void initState() {
     super.initState();
 
-    sms.campaign.list(CampaignListPayload(senderId: widget.senderId)).then(
+    sms.campaign.list(senderId: widget.senderId).then(
       (value) {
         localDB.put("CAMPAIGNS${widget.senderId}", value.data ?? []);
       },

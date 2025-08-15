@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/models.dart';
-import 'package:mon_sms_pro/payload/group_payload.dart';
+import 'package:mon_sms_pro/payload/core/list_payload.dart';
 
 /// A class to handle API interactions related to groups.
 class GroupApi {
@@ -25,16 +25,30 @@ class GroupApi {
 
   /// Fetches a list of groups.
   ///
-  /// [payload] contains optional parameters for filtering the list.
+  /// [count] is the number of items to return per page.
+  /// [page] is the page number to fetch.
+  /// [sort] is the sort order (asc or desc).
+  /// [orderBy] is the field to order by.
   /// Returns a list of `GroupModel` instances.
-  Future<ApiResponseModel<List<GroupModel>>> list(
-      [GroupListPayload? payload]) async {
+  Future<ApiResponseModel<List<GroupModel>>> list({
+    int? count,
+    int? page,
+    SortList? sort,
+    String? orderBy,
+  }) async {
     final url = "$_baseUrl/group/list";
 
-    debugPrint("flutter_mon_sms_pro/group/list/payload: ${payload?.toJson()}");
+    final payload = {
+      if (count != null) 'count': count,
+      if (page != null) 'page': page,
+      if (sort != null) 'sort': sort.value,
+      if (orderBy != null) 'orderBy': orderBy,
+    };
+
+    debugPrint("flutter_mon_sms_pro/group/list/payload: $payload");
 
     final r = await _dio.post(url, data: {
-      if (payload != null) ...payload.toJson(),
+      ...payload,
       "apiKey": _apiKey,
     });
 
@@ -52,16 +66,24 @@ class GroupApi {
 
   /// Creates a new group.
   ///
-  /// [payload] contains the group creation data.
+  /// [name] is the name of the group.
+  /// [description] is the optional description of the group.
   /// Returns the created `GroupModel` instance.
-  Future<ApiResponseModel<GroupModel?>> create(
-      CreateGroupPayload payload) async {
+  Future<ApiResponseModel<GroupModel?>> create({
+    required String name,
+    String? description,
+  }) async {
     final url = "$_baseUrl/group/create";
 
-    debugPrint("flutter_mon_sms_pro/group/create/payload: ${payload.toJson()}");
+    final payload = {
+      'name': name,
+      if (description != null) 'description': description,
+    };
+
+    debugPrint("flutter_mon_sms_pro/group/create/payload: $payload");
 
     final r = await _dio.post(url, data: {
-      ...payload.toJson(),
+      ...payload,
       "apiKey": _apiKey,
     });
 
@@ -75,15 +97,15 @@ class GroupApi {
 
   /// Deletes one or more groups from the group list.
   ///
-  /// [payload] contains the IDs of the groups to delete.
+  /// [id] is the ID of the group to delete.
   /// Returns `null` if there's an error, or nothing if successful.
-  Future<ApiResponseModel<void>> delete(DeleteGroupPayload payload) async {
-    final url = "$_baseUrl/group/delete";
+  Future<ApiResponseModel<void>> delete({required String id}) async {
+    final url = "$_baseUrl/group/$id/delete";
 
-    debugPrint("flutter_mon_sms_pro/group/delete/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/group/delete/payload: $id");
 
     final r = await _dio.post(url, data: {
-      ...payload.toJson(),
+      "id": id,
       "apiKey": _apiKey,
     });
 
@@ -96,15 +118,15 @@ class GroupApi {
 
   /// Retrieves a group from the group list.
   ///
-  /// [payload] contains the ID of the group to retrieve.
+  /// [id] is the ID of the group to retrieve.
   /// Returns a `GroupModel` instance if successful, or `null` if there's an error.
-  Future<ApiResponseModel<GroupModel?>> get(GetGroupPayload payload) async {
-    final url = "$_baseUrl/group/${payload.id}";
+  Future<ApiResponseModel<GroupModel?>> get({required String id}) async {
+    final url = "$_baseUrl/group/$id";
 
-    debugPrint("flutter_mon_sms_pro/group/get/payload: ${payload.toJson()}");
+    debugPrint("flutter_mon_sms_pro/group/get/payload: $id");
 
     final r = await _dio.post(url, data: {
-      ...payload.toJson(),
+      "id": id,
       "apiKey": _apiKey,
     });
 
@@ -118,16 +140,27 @@ class GroupApi {
 
   /// Updates a group in the group list.
   ///
-  /// [payload] contains the updated group data.
+  /// [id] is the ID of the group to update.
+  /// [name] is the new name of the group.
+  /// [description] is the new description of the group.
   /// Returns a `GroupModel` instance if successful, or `null` if there's an error.
-  Future<ApiResponseModel<GroupModel?>> update(
-      UpdateGroupPayload payload) async {
-    final url = "$_baseUrl/group/${payload.id}/update";
+  Future<ApiResponseModel<GroupModel?>> update({
+    required String id,
+    String? name,
+    String? description,
+  }) async {
+    final url = "$_baseUrl/group/$id/update";
 
-    debugPrint("flutter_mon_sms_pro/group/update/payload: ${payload.toJson()}");
+    final payload = {
+      'id': id,
+      if (name != null) 'name': name,
+      if (description != null) 'description': description,
+    };
+
+    debugPrint("flutter_mon_sms_pro/group/update/payload: $payload");
 
     final r = await _dio.post(url, data: {
-      ...payload.toJson(),
+      ...payload,
       "apiKey": _apiKey,
     });
 

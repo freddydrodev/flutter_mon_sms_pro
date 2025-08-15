@@ -1,6 +1,5 @@
 import 'package:example/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:mon_sms_pro/mon_sms_pro.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -28,10 +27,8 @@ class _AuthScreenState extends State<AuthScreen> {
           ElevatedButton(
             onPressed: () async {
               final otp = await sms.otp.get(
-                GetOtpPayload(
-                  phoneNumber: "+2250708517414",
-                  senderId: dotenv.env['SENDER_ID'],
-                ),
+                phoneNumber: "+2250708517414",
+                senderId: dotenv.env['SENDER_ID'],
               );
 
               if (otp.success && otp.data != null) {
@@ -56,11 +53,9 @@ class _AuthScreenState extends State<AuthScreen> {
                 final val = _otpController.value.text;
 
                 final otp = await sms.otp.verify(
-                  VerifyOtpPayload(
-                    token: _token!,
-                    otp: val,
-                    phoneNumber: "+2250708517414",
-                  ),
+                  token: _token!,
+                  otp: val,
+                  phoneNumber: "+2250708517414",
                 );
 
                 if (otp.success) {
@@ -77,7 +72,7 @@ class _AuthScreenState extends State<AuthScreen> {
           // ElevatedButton(
           //   onPressed: () async {
           //     final list = await sms.campaign.list(
-          //       CampaignListPayload(senderId: "ID GOES HERE"),
+          //       senderId: "ID GOES HERE",
           //     );
 
           //     localDB.put("CAMPAINS", list);

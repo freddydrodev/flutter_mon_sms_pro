@@ -8,7 +8,6 @@ import 'package:mon_sms_pro/apis/otp_api.dart';
 import 'package:mon_sms_pro/apis/sender_api.dart';
 
 export 'package:mon_sms_pro/models/init_hive_adapters.dart';
-export 'package:mon_sms_pro/payload/payload.dart';
 export 'package:mon_sms_pro/models/models.dart';
 
 class MonSMSPRO {

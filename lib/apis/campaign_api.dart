@@ -2,7 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
-import 'package:mon_sms_pro/payload/campaign_payload.dart';
+import 'package:mon_sms_pro/models/contact/contact_model.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 /// A class to handle API interactions related to campaigns.
 class CampaignApi {
@@ -25,17 +26,21 @@ class CampaignApi {
 
   /// Fetches a list of campaigns.
   ///
-  /// [payload] contains optional parameters for filtering the list.
+  /// [senderId] is the ID of the sender to get campaigns for.
   /// Returns a list of `CampaignModel` instances.
-  Future<ApiResponseModel<List<CampaignModel>>> list(
-      CampaignListPayload payload) async {
-    final url = "$_baseUrl/sender/${payload.senderId}/campaign";
+  Future<ApiResponseModel<List<CampaignModel>>> list({
+    required String senderId,
+  }) async {
+    final url = "$_baseUrl/sender/$senderId/campaign";
 
-    debugPrint(
-        "flutter_mon_sms_pro/campaign/list/payload: ${payload.toJson()}");
+    final payload = {
+      'senderId': senderId,
+    };
+
+    debugPrint("flutter_mon_sms_pro/campaign/list/payload: $payload");
 
     final r = await _dio.post(url, data: {
-      ...payload.toJson(),
+      ...payload,
       "apiKey": _apiKey,
     });
 
@@ -53,17 +58,39 @@ class CampaignApi {
 
   /// Creates a new campaign.
   ///
-  /// [payload] contains the campaign creation data.
+  /// [name] is the name of the campaign.
+  /// [contacts] is the optional list of contacts for the campaign.
+  /// [groupsIds] is the optional list of group IDs for the campaign.
+  /// [text] is the optional text content of the campaign.
+  /// [senderId] is the optional sender ID for the campaign.
+  /// [type] is the optional SMS type (default: sms).
+  /// [forceSenderId] is whether to force the sender ID (default: false).
   /// Returns the created `CampaignModel` instance.
-  Future<ApiResponseModel<CampaignModel?>> create(
-      CreateCampaignPayload payload) async {
+  Future<ApiResponseModel<CampaignModel?>> create({
+    required String name,
+    List<ContactModel>? contacts = const [],
+    List<String>? groupsIds = const [],
+    String? text,
+    String? senderId,
+    SMSType? type = SMSType.sms,
+    bool? forceSenderId = false,
+  }) async {
     final url = "$_baseUrl/campaign/create";
 
-    debugPrint(
-        "flutter_mon_sms_pro/campaign/create/payload: ${payload.toJson()}");
+    final payload = {
+      'name': name,
+      'contacts': contacts?.map((e) => e.toJson()).toList() ?? [],
+      'groupsIds': groupsIds ?? [],
+      if (text != null) 'text': text,
+      if (senderId != null) 'senderId': senderId,
+      if (type != null) 'type': type.value,
+      'forceSenderId': forceSenderId ?? false,
+    };
+
+    debugPrint("flutter_mon_sms_pro/campaign/create/payload: $payload");
 
     final r = await _dio.post(url, data: {
-      ...payload.toJson(),
+      ...payload,
       "apiKey": _apiKey,
     });
 

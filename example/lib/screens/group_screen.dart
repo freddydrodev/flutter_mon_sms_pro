@@ -51,8 +51,7 @@ class _GroupScreenState extends State<GroupScreen> {
               final group = groups[index];
               return ListTile(
                 title: Text(group.name),
-                subtitle:
-                    Text(group.count?.contacts.toString() ?? "no contact"),
+                subtitle: Text(group.count.contacts.toString()),
               );
             },
           );
