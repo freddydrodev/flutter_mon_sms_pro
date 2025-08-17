@@ -1,16 +1,16 @@
 import 'package:hive_ce/hive.dart';
 
 class ContactModel extends HiveObject {
+  final String? id;
   final String phone;
-  final String id;
-  final String name;
-  final DateTime createdAt;
+  final String? name;
+  final DateTime? createdAt;
 
   ContactModel({
+    this.id,
     required this.phone,
-    required this.id,
-    required this.name,
-    required this.createdAt,
+    this.name,
+    this.createdAt,
   });
 
   factory ContactModel.fromJson(Map<String, dynamic> json) {
@@ -18,7 +18,8 @@ class ContactModel extends HiveObject {
       id: json['id'],
       phone: json['phone'],
       name: json['name'],
-      createdAt: DateTime.parse(json['createdAt']),
+      createdAt:
+          json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
     );
   }
 
@@ -27,7 +28,7 @@ class ContactModel extends HiveObject {
       'id': id,
       'phone': phone,
       'name': name,
-      'createdAt': createdAt.toIso8601String(),
+      'createdAt': createdAt?.toIso8601String(),
     };
   }
 }

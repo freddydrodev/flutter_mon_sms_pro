@@ -1,6 +1,6 @@
 name: mon_sms_pro
 description: "Send SMS using the monsms.pro API"
-version: 0.1.4
+version: 0.1.5
 homepage: https://github.com/freddydrodev/flutter_mon_sms_pro
 repository: https://github.com/freddydrodev/flutter_mon_sms_pro
 issue_tracker: https://github.com/freddydrodev/flutter_mon_sms_pro/issues

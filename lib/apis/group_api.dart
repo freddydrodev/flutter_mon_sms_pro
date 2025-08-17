@@ -71,13 +71,13 @@ class GroupApi {
   /// Returns the created `GroupModel` instance.
   Future<ApiResponseModel<GroupModel?>> create({
     required String name,
-    String? description,
+    required List<ContactModel> contacts,
   }) async {
     final url = "$_baseUrl/group/create";
 
     final payload = {
       'name': name,
-      if (description != null) 'description': description,
+      'contacts': contacts.map((e) => e.toJson()).toList(),
     };
 
     debugPrint("flutter_mon_sms_pro/group/create/payload: $payload");
@@ -146,15 +146,15 @@ class GroupApi {
   /// Returns a `GroupModel` instance if successful, or `null` if there's an error.
   Future<ApiResponseModel<GroupModel?>> update({
     required String id,
-    String? name,
-    String? description,
+    required String name,
+    required List<ContactModel> contacts,
   }) async {
     final url = "$_baseUrl/group/$id/update";
 
     final payload = {
       'id': id,
-      if (name != null) 'name': name,
-      if (description != null) 'description': description,
+      'name': name,
+      'contacts': contacts.map((e) => e.toJson()).toList(),
     };
 
     debugPrint("flutter_mon_sms_pro/group/update/payload: $payload");
