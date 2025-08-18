@@ -1,14 +1,14 @@
 import 'package:hive_ce/hive.dart';
 
 class VersionModel extends HiveObject {
-  final String id;
+  final String? id;
   final String name;
   final String description;
   final bool isMajorRelease;
   final DateTime createdAt;
 
   VersionModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.description,
     required this.isMajorRelease,

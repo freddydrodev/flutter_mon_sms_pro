@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
 class TransactionModel extends HiveObject {
-  final String id;
+  final String? id;
   final TransactionType type;
   final TransactionStatus status;
   final PaymentMethod paymentMethod;
@@ -15,7 +15,7 @@ class TransactionModel extends HiveObject {
   final String? offerId;
 
   TransactionModel({
-    required this.id,
+    this.id,
     required this.type,
     required this.status,
     required this.paymentMethod,

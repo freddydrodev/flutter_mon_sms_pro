@@ -1,12 +1,12 @@
 import 'package:hive_ce/hive.dart';
 
 class ImportModel extends HiveObject {
-  final String id;
+  final String? id;
   final String userId;
   final DateTime createdAt;
 
   ImportModel({
-    required this.id,
+    this.id,
     required this.userId,
     required this.createdAt,
   });

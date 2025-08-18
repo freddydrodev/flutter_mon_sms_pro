@@ -20,7 +20,7 @@ enum SenderStatus {
 }
 
 class SenderModel extends HiveObject {
-  final String id;
+  final String? id;
   final String name;
   final String? description;
   final SenderStatus status;
@@ -29,7 +29,7 @@ class SenderModel extends HiveObject {
   final String? userId;
 
   SenderModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.status,
     required this.createdAt,

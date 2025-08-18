@@ -2,7 +2,7 @@ import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
 class FollowerModel extends HiveObject {
-  final String id;
+  final String? id;
   final String phoneNumber;
   final String? password;
   final String name;
@@ -14,7 +14,7 @@ class FollowerModel extends HiveObject {
   final DateTime createdAt;
 
   FollowerModel({
-    required this.id,
+    this.id,
     required this.phoneNumber,
     this.password,
     required this.name,
