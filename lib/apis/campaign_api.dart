@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mon_sms_pro/models/api_response_model.dart';
+import 'package:mon_sms_pro/models/campaign/campaign_details_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
 import 'package:mon_sms_pro/models/contact/contact_model.dart';
 import 'package:mon_sms_pro/models/utils.dart';
@@ -51,6 +52,36 @@ class CampaignApi {
       (data) => (data as List<dynamic>)
           .map((e) => CampaignModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+    );
+
+    return response;
+  }
+
+  /// Fetches a list of campaigns.
+  ///
+  /// [campaignId] is the ID of the campaign to get details for.
+  /// Returns a list of `CampaignModel` instances.
+  Future<ApiResponseModel<CampaignDetailsModel>> get({
+    required String id,
+  }) async {
+    final url = "$_baseUrl/campaign/$id";
+
+    final payload = {
+      'id': id,
+    };
+
+    debugPrint("flutter_mon_sms_pro/campaign/list/payload: $payload");
+
+    final r = await _dio.post(url, data: {
+      ...payload,
+      "apiKey": _apiKey,
+    });
+
+    debugPrint("flutter_mon_sms_pro/campaign/list/data: ${r.data}");
+
+    final response = ApiResponseModel.fromJson(
+      r.data,
+      (data) => CampaignDetailsModel.fromJson(data as Map<String, dynamic>),
     );
 
     return response;

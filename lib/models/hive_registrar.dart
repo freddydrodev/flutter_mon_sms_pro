@@ -4,6 +4,7 @@ import 'package:hive_ce/hive.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_count_model.dart';
+import 'package:mon_sms_pro/models/campaign/campaign_details_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_recurring_day_model.dart';
 import 'package:mon_sms_pro/models/contact/contact_model.dart';
 import 'package:mon_sms_pro/models/core/import_model.dart';
@@ -33,12 +34,13 @@ part 'hive_registrar.g.dart';
   AdapterSpec<OfferName>(),
   AdapterSpec<OTPStatus>(),
   AdapterSpec<SenderStatus>(),
-  
+
   // Classes
   AdapterSpec<Coords>(),
   AdapterSpec<Location>(),
   AdapterSpec<CampaignModel>(),
   AdapterSpec<CampaignCountModel>(),
+  AdapterSpec<CampaignDetailsModel>(),
   AdapterSpec<CampaignRecurringDayModel>(),
   AdapterSpec<ContactModel>(),
   AdapterSpec<ImportModel>(),

@@ -46,6 +46,9 @@ Future<void> initMonSMSProHiveAdapters() async {
   if (!Hive.isAdapterRegistered(CampaignCountModelAdapter().typeId)) {
     Hive.registerAdapter(CampaignCountModelAdapter());
   }
+  if (!Hive.isAdapterRegistered(CampaignDetailsModelAdapter().typeId)) {
+    Hive.registerAdapter(CampaignDetailsModelAdapter());
+  }
   if (!Hive.isAdapterRegistered(CampaignRecurringDayModelAdapter().typeId)) {
     Hive.registerAdapter(CampaignRecurringDayModelAdapter());
   }

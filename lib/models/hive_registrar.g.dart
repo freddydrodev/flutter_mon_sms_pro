@@ -96,7 +96,7 @@ class CampaignModelAdapter extends TypeAdapter<CampaignModel> {
     return CampaignModel(
       id: fields[0] as String,
       text: fields[1] as String,
-      isEnabled: fields[2] == null ? false : fields[2] as bool?,
+      isEnabled: fields[2] == null ? true : fields[2] as bool,
       type: fields[3] as SMSType,
       contactCount: (fields[4] as num).toInt(),
       creditUsed: (fields[5] as num).toInt(),
@@ -1305,6 +1305,88 @@ class SenderStatusAdapter extends TypeAdapter<SenderStatus> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is SenderStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class CampaignDetailsModelAdapter extends TypeAdapter<CampaignDetailsModel> {
+  @override
+  final typeId = 29;
+
+  @override
+  CampaignDetailsModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return CampaignDetailsModel(
+      id: fields[0] as String,
+      name: fields[1] as String,
+      text: fields[2] as String,
+      isEnabled: fields[3] as bool,
+      type: fields[4] as SMSType,
+      contactCount: (fields[5] as num).toInt(),
+      creditUsed: (fields[6] as num).toInt(),
+      coords: (fields[7] as Map?)?.cast<String, dynamic>(),
+      recurring: fields[8] as CampaignRecurringDayModel?,
+      scheduledDate: fields[9] as DateTime?,
+      userId: fields[10] as String,
+      createdAt: fields[11] as DateTime,
+      updatedAt: fields[12] as DateTime,
+      count: fields[13] as CampaignCountModel,
+      contacts: (fields[14] as List).cast<ContactModel>(),
+      groups: (fields[15] as List).cast<GroupModel>(),
+      sender: fields[16] as SenderModel,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CampaignDetailsModel obj) {
+    writer
+      ..writeByte(17)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.text)
+      ..writeByte(3)
+      ..write(obj.isEnabled)
+      ..writeByte(4)
+      ..write(obj.type)
+      ..writeByte(5)
+      ..write(obj.contactCount)
+      ..writeByte(6)
+      ..write(obj.creditUsed)
+      ..writeByte(7)
+      ..write(obj.coords)
+      ..writeByte(8)
+      ..write(obj.recurring)
+      ..writeByte(9)
+      ..write(obj.scheduledDate)
+      ..writeByte(10)
+      ..write(obj.userId)
+      ..writeByte(11)
+      ..write(obj.createdAt)
+      ..writeByte(12)
+      ..write(obj.updatedAt)
+      ..writeByte(13)
+      ..write(obj.count)
+      ..writeByte(14)
+      ..write(obj.contacts)
+      ..writeByte(15)
+      ..write(obj.groups)
+      ..writeByte(16)
+      ..write(obj.sender);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CampaignDetailsModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

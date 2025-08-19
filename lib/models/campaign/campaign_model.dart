@@ -5,7 +5,7 @@ import 'package:mon_sms_pro/models/utils.dart';
 class CampaignModel extends HiveObject {
   final String id;
   final String text;
-  final bool? isEnabled;
+  final bool isEnabled;
   final SMSType type;
   final int contactCount;
   final int creditUsed;
@@ -15,7 +15,7 @@ class CampaignModel extends HiveObject {
   CampaignModel({
     required this.id,
     required this.text,
-    this.isEnabled = false,
+    this.isEnabled = true,
     required this.type,
     required this.contactCount,
     required this.creditUsed,
