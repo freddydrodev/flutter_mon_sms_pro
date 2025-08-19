@@ -4,6 +4,7 @@ import 'package:mon_sms_pro/models/api_response_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_details_model.dart';
 import 'package:mon_sms_pro/models/campaign/campaign_model.dart';
 import 'package:mon_sms_pro/models/contact/contact_model.dart';
+import 'package:mon_sms_pro/models/campaign/campaign_recurring_day_model.dart';
 import 'package:mon_sms_pro/models/utils.dart';
 
 /// A class to handle API interactions related to campaigns.
@@ -98,13 +99,14 @@ class CampaignApi {
   /// [forceSenderId] is whether to force the sender ID (default: false).
   /// Returns the created `CampaignModel` instance.
   Future<ApiResponseModel<CampaignModel?>> create({
-    required String name,
+    required String text,
+    required String senderId,
+    String? name,
     List<ContactModel>? contacts = const [],
     List<String>? groupsIds = const [],
-    String? text,
-    String? senderId,
     SMSType? type = SMSType.sms,
-    bool? forceSenderId = false,
+    DateTime? scheduledDate,
+    CampaignRecurringDayModel? recurring,
   }) async {
     final url = "$_baseUrl/campaign/create";
 
@@ -112,10 +114,12 @@ class CampaignApi {
       'name': name,
       'contacts': contacts?.map((e) => e.toJson()).toList() ?? [],
       'groupsIds': groupsIds ?? [],
-      if (text != null) 'text': text,
-      if (senderId != null) 'senderId': senderId,
+      'text': text,
+      'senderId': senderId,
       if (type != null) 'type': type.value,
-      'forceSenderId': forceSenderId ?? false,
+      if (scheduledDate != null)
+        'scheduledDate': scheduledDate.toIso8601String(),
+      if (recurring != null) 'recurring': recurring.toJson(),
     };
 
     debugPrint("flutter_mon_sms_pro/campaign/create/payload: $payload");
@@ -126,6 +130,69 @@ class CampaignApi {
     });
 
     debugPrint("flutter_mon_sms_pro/campaign/create/data: ${r.data}");
+
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => CampaignModel.fromJson(data as Map<String, dynamic>));
+
+    return response;
+  }
+
+  /// Updates an existing campaign.
+  ///
+  /// [id] is the ID of the campaign to update.
+  /// [scheduledDate] is the optional scheduled date for the campaign.
+  /// [recurring] is the optional recurring configuration for the campaign.
+  /// Returns the updated `CampaignModel` instance.
+  Future<ApiResponseModel<CampaignModel?>> update({
+    required String id,
+    DateTime? scheduledDate,
+    CampaignRecurringDayModel? recurring,
+  }) async {
+    final url = "$_baseUrl/campaign/$id/update";
+
+    final payload = {
+      'id': id,
+      if (scheduledDate != null)
+        'scheduledDate': scheduledDate.toIso8601String(),
+      if (recurring != null) 'recurring': recurring.toJson(),
+    };
+
+    debugPrint("flutter_mon_sms_pro/campaign/update/payload: $payload");
+
+    final r = await _dio.post(url, data: {
+      ...payload,
+      "apiKey": _apiKey,
+    });
+
+    debugPrint("flutter_mon_sms_pro/campaign/update/data: ${r.data}");
+
+    final response = ApiResponseModel.fromJson(
+        r.data, (data) => CampaignModel.fromJson(data as Map<String, dynamic>));
+
+    return response;
+  }
+
+  /// Toggles the enabled state of a campaign.
+  ///
+  /// [id] is the ID of the campaign to toggle.
+  /// Returns the updated `CampaignModel` instance.
+  Future<ApiResponseModel<CampaignModel?>> toggleEnable({
+    required String id,
+  }) async {
+    final url = "$_baseUrl/campaign/$id/toggle-enable";
+
+    final payload = {
+      'id': id,
+    };
+
+    debugPrint("flutter_mon_sms_pro/campaign/toggle/payload: $payload");
+
+    final r = await _dio.post(url, data: {
+      ...payload,
+      "apiKey": _apiKey,
+    });
+
+    debugPrint("flutter_mon_sms_pro/campaign/toggle/data: ${r.data}");
 
     final response = ApiResponseModel.fromJson(
         r.data, (data) => CampaignModel.fromJson(data as Map<String, dynamic>));

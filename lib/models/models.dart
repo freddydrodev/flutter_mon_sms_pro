@@ -2,6 +2,7 @@
 export 'campaign/campaign_model.dart';
 export 'campaign/campaign_count_model.dart';
 export 'campaign/campaign_recurring_day_model.dart';
+export 'campaign/campaign_details_model.dart';
 
 // CONTACT RELATED
 export 'contact/contact_model.dart';
