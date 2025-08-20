@@ -88,16 +88,17 @@ Future<void> _updateHiveRegistrar(List<ModelInfo> models) async {
   final registrarFile = File('lib/models/hive_registrar.dart');
   final content = await registrarFile.readAsString();
 
-  // Generate imports
-  final imports = <String>[];
-  imports.add("import 'package:hive_ce/hive.dart';");
-  imports.add("import 'package:mon_sms_pro/models/utils.dart';");
+  // Generate imports with deduplication
+  final importSet = <String>{};
+  importSet.add("import 'package:hive_ce/hive.dart';");
+  importSet.add("import 'package:mon_sms_pro/models/utils.dart';");
 
   for (final model in models) {
     final relativePath = model.file.replaceFirst('lib/', '');
-    imports.add("import 'package:mon_sms_pro/$relativePath';");
+    importSet.add("import 'package:mon_sms_pro/$relativePath';");
   }
 
+  final imports = importSet.toList()..sort();
   imports.add("part 'hive_registrar.g.dart';");
 
   // Generate adapter specs
