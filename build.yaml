@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      hive_ce_generator|hive_ce_generator:
+        enabled: true
+        generate_for:
+          - lib/models/**.dart
+        options:
+          # Automatically generate adapters for all classes with @HiveType annotation
+          auto_generate: true

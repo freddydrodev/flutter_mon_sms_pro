@@ -22,3 +22,28 @@ Une fois que vous avez récupéré cette clé dans votre presse-papier, suivez l
 ## Documentation
 
 Rendez-vous sur [notre site Web](https://docs.monsms.pro/libs/dart/get-started) pour plus d'informations.
+
+## 🗄️ Hive Database Management
+
+This project includes automated Hive database management for local storage. See [Hive Automation Documentation](docs/HIVE_AUTOMATION.md) for details.
+
+### Quick Commands
+
+```bash
+# Update Hive registrars and build adapters
+make hive-full
+
+# Watch for changes
+make hive-watch
+
+# Clean build cache
+make hive-clean
+```
+
+### Pre-commit Hook (Recommended)
+
+Install the pre-commit hook for automatic Hive updates:
+
+```bash
+ln -s ../../scripts/pre_commit_hook.sh .git/hooks/pre-commit
+```

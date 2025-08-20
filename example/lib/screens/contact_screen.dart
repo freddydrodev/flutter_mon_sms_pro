@@ -50,7 +50,7 @@ class _ContactScreenState extends State<ContactScreen> {
             itemBuilder: (context, index) {
               final contact = contacts[index];
               return ListTile(
-                title: Text(contact.name),
+                title: Text(contact.name ?? ""),
                 subtitle: Text(contact.phone),
                 // trailing: Text(contact.createdAt.toString()),
               );

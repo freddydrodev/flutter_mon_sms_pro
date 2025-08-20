@@ -7,6 +7,7 @@ class CampaignModel extends HiveObject {
   final String text;
   final bool isEnabled;
   final SMSType type;
+  final DateTime? scheduledDate;
   final int contactCount;
   final int creditUsed;
   final DateTime createdAt;
@@ -21,6 +22,7 @@ class CampaignModel extends HiveObject {
     required this.creditUsed,
     required this.createdAt,
     required this.count,
+    this.scheduledDate,
   });
 
   factory CampaignModel.fromJson(Map<String, dynamic> json) {
@@ -32,6 +34,9 @@ class CampaignModel extends HiveObject {
       createdAt: DateTime.parse(json['createdAt']),
       contactCount: json['contactCount'],
       creditUsed: json['creditUsed'],
+      scheduledDate: json['scheduledDate'] != null
+          ? DateTime.parse(json['scheduledDate'])
+          : null,
     );
   }
 
@@ -44,6 +49,7 @@ class CampaignModel extends HiveObject {
       'createdAt': createdAt.toIso8601String(),
       'contactCount': contactCount,
       'creditUsed': creditUsed,
+      'scheduledDate': scheduledDate?.toIso8601String(),
     };
   }
 }

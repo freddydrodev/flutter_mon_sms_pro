@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:example/screens/campaign_screen.dart';
 import 'package:example/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
@@ -84,10 +83,11 @@ class _SenderScreenState extends State<SenderScreen> {
               final sender = senders[index];
               return ListTile(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CampaignScreen(senderId: sender.id),
+                  // TODO: Navigate to campaign screen when implemented
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Campaign screen not implemented yet"),
+                      backgroundColor: Colors.orange,
                     ),
                   );
                 },

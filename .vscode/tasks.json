@@ -1,0 +1,60 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Hive: Update Registrars",
+      "type": "shell",
+      "command": "dart",
+      "args": ["scripts/update_hive_registrar.dart"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Hive: Build Adapters",
+      "type": "shell",
+      "command": "dart",
+      "args": ["run", "build_runner", "build", "--delete-conflicting-outputs"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Hive: Watch & Build",
+      "type": "shell",
+      "command": "dart",
+      "args": ["run", "build_runner", "watch", "--delete-conflicting-outputs"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      },
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "Hive: Full Update",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Hive: Update Registrars", "Hive: Build Adapters"],
+      "group": "build",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared"
+      }
+    }
+  ]
+}
