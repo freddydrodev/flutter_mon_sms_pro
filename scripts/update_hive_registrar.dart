@@ -1,7 +1,6 @@
 #!/usr/bin/env dart
 
 import 'dart:io';
-import 'dart:convert';
 
 /// Script to automatically update Hive registrar files
 /// Run with: dart scripts/update_hive_registrar.dart
@@ -86,7 +85,6 @@ Future<List<ModelInfo>> _extractModels(List<File> files) async {
 
 Future<void> _updateHiveRegistrar(List<ModelInfo> models) async {
   final registrarFile = File('lib/models/hive_registrar.dart');
-  final content = await registrarFile.readAsString();
 
   // Generate imports with deduplication
   final importSet = <String>{};
