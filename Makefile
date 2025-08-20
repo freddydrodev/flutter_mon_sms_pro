@@ -10,7 +10,7 @@ hive-update: ## Update Hive registrar files automatically
 
 hive-build: ## Build Hive adapters
 	@echo "🔨 Building Hive adapters..."
-	flutter pub run build_runner build --delete-conflicting-outputs --build-filter="lib/models/**
+	flutter pub run build_runner build --delete-conflicting-outputs --build-filter="lib/models/**"
 
 hive-watch: ## Watch for changes and rebuild Hive adapters
 	@echo "👀 Watching for changes..."
@@ -21,5 +21,9 @@ hive-clean: ## Clean build cache
 	flutter pub run build_runner clean
 
 hive-full: hive-update hive-build ## Update and build Hive adapters
+
+hive-clear-db: ## Clear Hive database to resolve type ID conflicts
+	@echo "🧹 Clearing Hive database..."
+	dart scripts/clear_hive_db.dart
 
 dev: hive-watch ## Start development mode with Hive watching

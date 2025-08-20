@@ -51,6 +51,16 @@ Future<List<ModelInfo>> _extractModels(List<File> files) async {
     for (int i = 0; i < lines.length; i++) {
       final line = lines[i].trim();
 
+      // Look for enum definitions
+      if (line.startsWith('enum ')) {
+        final enumName = line.split(' ')[1].split('<')[0].split('{')[0];
+        models.add(ModelInfo(
+          name: enumName,
+          file: file.path,
+          isEnum: true,
+        ));
+      }
+
       // Look for class definitions that extend HiveObject or have @HiveType
       if (line.startsWith('class ') &&
           (line.contains('extends HiveObject') ||

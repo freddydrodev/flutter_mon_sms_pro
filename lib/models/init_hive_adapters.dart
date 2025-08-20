@@ -4,6 +4,33 @@ import 'package:mon_sms_pro/models/hive_registrar.dart';
 Future<void> initMonSMSProHiveAdapters() async {
   await Hive.initFlutter();
 
+  if (!Hive.isAdapterRegistered(OTPStatusAdapter().typeId)) {
+    Hive.registerAdapter(OTPStatusAdapter());
+  }
+  if (!Hive.isAdapterRegistered(SMSTypeAdapter().typeId)) {
+    Hive.registerAdapter(SMSTypeAdapter());
+  }
+  if (!Hive.isAdapterRegistered(SexTypeAdapter().typeId)) {
+    Hive.registerAdapter(SexTypeAdapter());
+  }
+  if (!Hive.isAdapterRegistered(CountryAdapter().typeId)) {
+    Hive.registerAdapter(CountryAdapter());
+  }
+  if (!Hive.isAdapterRegistered(TransactionTypeAdapter().typeId)) {
+    Hive.registerAdapter(TransactionTypeAdapter());
+  }
+  if (!Hive.isAdapterRegistered(TransactionStatusAdapter().typeId)) {
+    Hive.registerAdapter(TransactionStatusAdapter());
+  }
+  if (!Hive.isAdapterRegistered(PaymentMethodAdapter().typeId)) {
+    Hive.registerAdapter(PaymentMethodAdapter());
+  }
+  if (!Hive.isAdapterRegistered(OfferNameAdapter().typeId)) {
+    Hive.registerAdapter(OfferNameAdapter());
+  }
+  if (!Hive.isAdapterRegistered(SenderStatusAdapter().typeId)) {
+    Hive.registerAdapter(SenderStatusAdapter());
+  }
   if (!Hive.isAdapterRegistered(TransactionModelAdapter().typeId)) {
     Hive.registerAdapter(TransactionModelAdapter());
   }
