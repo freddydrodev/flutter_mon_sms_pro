@@ -9,8 +9,6 @@ import 'package:mon_sms_pro/models/core/offer_model.dart';
 import 'package:mon_sms_pro/models/core/otp_model.dart';
 import 'package:mon_sms_pro/models/group/group_model.dart';
 import 'package:mon_sms_pro/models/group/group_count_model.dart';
-import 'package:mon_sms_pro/models/utils.dart';
-import 'package:mon_sms_pro/models/utils.dart';
 import 'package:mon_sms_pro/models/sender/sender_model.dart';
 import 'package:mon_sms_pro/models/template/template_model.dart';
 import 'package:mon_sms_pro/models/lerezo/company_type_model.dart';
