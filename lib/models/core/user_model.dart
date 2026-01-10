@@ -8,6 +8,7 @@ class UserModel extends HiveObject {
   final String? password;
   final String fullName;
   final DateTime createdAt;
+  final DateTime? updatedAt;
   final bool isAdmin;
   final bool newUser;
   final String? xoraiaID;
@@ -20,6 +21,10 @@ class UserModel extends HiveObject {
   final String? address;
   final String? city;
   final Country? country;
+  final int availableCredit;
+  final bool blocked;
+  final bool isVerified;
+  final String? codePromo;
 
   UserModel({
     this.id,
@@ -28,6 +33,7 @@ class UserModel extends HiveObject {
     this.password,
     required this.fullName,
     required this.createdAt,
+    this.updatedAt,
     this.isAdmin = false,
     this.newUser = true,
     this.xoraiaID,
@@ -40,6 +46,10 @@ class UserModel extends HiveObject {
     this.address,
     this.city,
     this.country,
+    this.availableCredit = 0,
+    this.blocked = false,
+    this.isVerified = false,
+    this.codePromo,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -50,6 +60,9 @@ class UserModel extends HiveObject {
       password: json['password'],
       fullName: json['fullName'],
       createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'])
+          : null,
       isAdmin: json['isAdmin'] ?? false,
       newUser: json['newUser'] ?? true,
       xoraiaID: json['xoraiaID'],
@@ -65,6 +78,10 @@ class UserModel extends HiveObject {
       city: json['city'],
       country:
           json['country'] != null ? Country.fromValue(json['country']) : null,
+      availableCredit: json['availableCredit'] ?? 0,
+      blocked: json['blocked'] ?? false,
+      isVerified: json['isVerified'] ?? false,
+      codePromo: json['codePromo'],
     );
   }
 
@@ -76,6 +93,7 @@ class UserModel extends HiveObject {
       'password': password,
       'fullName': fullName,
       'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt?.toIso8601String(),
       'isAdmin': isAdmin,
       'newUser': newUser,
       'xoraiaID': xoraiaID,
@@ -88,6 +106,10 @@ class UserModel extends HiveObject {
       'address': address,
       'city': city,
       'country': country?.value,
+      'availableCredit': availableCredit,
+      'blocked': blocked,
+      'isVerified': isVerified,
+      'codePromo': codePromo,
     };
   }
 }

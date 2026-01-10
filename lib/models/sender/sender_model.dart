@@ -1,4 +1,5 @@
 import 'package:hive_ce/hive.dart';
+import 'package:mon_sms_pro/models/utils.dart';
 
 enum SenderStatus {
   pending("PENDING"),
@@ -26,16 +27,26 @@ class SenderModel extends HiveObject {
   final SenderStatus status;
   final bool? archived;
   final DateTime createdAt;
+  final DateTime? updatedAt;
   final String? userId;
+  final String? companyId;
+  final String? companyTypeId;
+  final String? example;
+  final List<SmsType>? types;
 
   SenderModel({
     this.id,
     required this.name,
     required this.status,
     required this.createdAt,
+    this.updatedAt,
     this.description,
     this.archived = false,
     this.userId,
+    this.companyId,
+    this.companyTypeId,
+    this.example,
+    this.types,
   });
 
   factory SenderModel.fromJson(Map<String, dynamic> json) {
@@ -46,7 +57,18 @@ class SenderModel extends HiveObject {
       status: SenderStatus.fromValue(json['status']),
       archived: json['archived'],
       createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'])
+          : null,
       userId: json['userId'],
+      companyId: json['companyId'],
+      companyTypeId: json['companyTypeId'],
+      example: json['example'],
+      types: json['types'] != null
+          ? (json['types'] as List<dynamic>)
+              .map((e) => SmsType.fromValue(e as String))
+              .toList()
+          : null,
     );
   }
 
@@ -58,7 +80,12 @@ class SenderModel extends HiveObject {
       'status': status.value,
       'archived': archived,
       'createdAt': createdAt.toIso8601String(),
-      'userId': userId
+      'updatedAt': updatedAt?.toIso8601String(),
+      'userId': userId,
+      'companyId': companyId,
+      'companyTypeId': companyTypeId,
+      'example': example,
+      'types': types?.map((e) => e.value).toList(),
     };
   }
 }

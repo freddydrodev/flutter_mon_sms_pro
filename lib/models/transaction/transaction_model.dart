@@ -10,9 +10,12 @@ class TransactionModel extends HiveObject {
   final int credit;
   final int price;
   final DateTime createdAt;
+  final DateTime? updatedAt;
   final String userId;
-  final String? campainId;
+  final String? campaignId;
   final String? offerId;
+  final String? companyId;
+  final TransactionPeriod? period;
 
   TransactionModel({
     this.id,
@@ -23,9 +26,12 @@ class TransactionModel extends HiveObject {
     required this.credit,
     this.price = 0,
     required this.createdAt,
+    this.updatedAt,
     required this.userId,
-    this.campainId,
+    this.campaignId,
     this.offerId,
+    this.companyId,
+    this.period,
   });
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
@@ -38,9 +44,17 @@ class TransactionModel extends HiveObject {
       credit: json['credit'],
       price: json['price'] ?? 0,
       createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'])
+          : null,
       userId: json['userId'],
-      campainId: json['campainId'],
+      // Support both old 'campainId' (typo) and correct 'campaignId'
+      campaignId: json['campaignId'] ?? json['campainId'],
       offerId: json['offerId'],
+      companyId: json['companyId'],
+      period: json['period'] != null
+          ? TransactionPeriod.fromValue(json['period'])
+          : null,
     );
   }
 
@@ -54,9 +68,12 @@ class TransactionModel extends HiveObject {
       'credit': credit,
       'price': price,
       'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt?.toIso8601String(),
       'userId': userId,
-      'campainId': campainId,
+      'campaignId': campaignId,
       'offerId': offerId,
+      'companyId': companyId,
+      'period': period?.value,
     };
   }
 }

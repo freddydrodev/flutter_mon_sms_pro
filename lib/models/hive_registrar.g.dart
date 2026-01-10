@@ -254,14 +254,20 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       id: fields[1] as String?,
       phone: fields[0] as String,
       name: fields[2] as String?,
+      firstName: fields[4] as String?,
+      lastName: fields[5] as String?,
+      sex: fields[6] as SexType?,
+      userId: fields[7] as String?,
+      companyId: fields[8] as String?,
       createdAt: fields[3] as DateTime?,
+      updatedAt: fields[9] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ContactModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.phone)
       ..writeByte(1)
@@ -269,7 +275,19 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       ..writeByte(2)
       ..write(obj.name)
       ..writeByte(3)
-      ..write(obj.createdAt);
+      ..write(obj.createdAt)
+      ..writeByte(4)
+      ..write(obj.firstName)
+      ..writeByte(5)
+      ..write(obj.lastName)
+      ..writeByte(6)
+      ..write(obj.sex)
+      ..writeByte(7)
+      ..write(obj.userId)
+      ..writeByte(8)
+      ..write(obj.companyId)
+      ..writeByte(9)
+      ..write(obj.updatedAt);
   }
 
   @override
@@ -380,22 +398,43 @@ class OTPModelAdapter extends TypeAdapter<OTPModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return OTPModel(
+      id: fields[3] as String?,
       token: fields[0] as String,
       phoneNumber: fields[1] as String,
       status: fields[2] as OTPStatus,
+      mode: fields[4] as OTPMode?,
+      appName: fields[5] as String?,
+      senderId: fields[6] as String?,
+      userId: fields[7] as String?,
+      createdAt: fields[8] as DateTime?,
+      updatedAt: fields[9] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, OTPModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.token)
       ..writeByte(1)
       ..write(obj.phoneNumber)
       ..writeByte(2)
-      ..write(obj.status);
+      ..write(obj.status)
+      ..writeByte(3)
+      ..write(obj.id)
+      ..writeByte(4)
+      ..write(obj.mode)
+      ..writeByte(5)
+      ..write(obj.appName)
+      ..writeByte(6)
+      ..write(obj.senderId)
+      ..writeByte(7)
+      ..write(obj.userId)
+      ..writeByte(8)
+      ..write(obj.createdAt)
+      ..writeByte(9)
+      ..write(obj.updatedAt);
   }
 
   @override
@@ -426,6 +465,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       password: fields[3] as String?,
       fullName: fields[4] as String,
       createdAt: fields[5] as DateTime,
+      updatedAt: fields[18] as DateTime?,
       isAdmin: fields[6] == null ? false : fields[6] as bool,
       newUser: fields[7] == null ? true : fields[7] as bool,
       xoraiaID: fields[8] as String?,
@@ -438,13 +478,17 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       address: fields[15] as String?,
       city: fields[16] as String?,
       country: fields[17] as Country?,
+      availableCredit: fields[19] == null ? 0 : (fields[19] as num).toInt(),
+      blocked: fields[20] == null ? false : fields[20] as bool,
+      isVerified: fields[21] == null ? false : fields[21] as bool,
+      codePromo: fields[22] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(23)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -480,7 +524,17 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..writeByte(16)
       ..write(obj.city)
       ..writeByte(17)
-      ..write(obj.country);
+      ..write(obj.country)
+      ..writeByte(18)
+      ..write(obj.updatedAt)
+      ..writeByte(19)
+      ..write(obj.availableCredit)
+      ..writeByte(20)
+      ..write(obj.blocked)
+      ..writeByte(21)
+      ..write(obj.isVerified)
+      ..writeByte(22)
+      ..write(obj.codePromo);
   }
 
   @override
@@ -779,16 +833,21 @@ class SenderModelAdapter extends TypeAdapter<SenderModel> {
       name: fields[1] as String,
       status: fields[3] as SenderStatus,
       createdAt: fields[5] as DateTime,
+      updatedAt: fields[7] as DateTime?,
       description: fields[2] as String?,
       archived: fields[4] == null ? false : fields[4] as bool?,
       userId: fields[6] as String?,
+      companyId: fields[8] as String?,
+      companyTypeId: fields[9] as String?,
+      example: fields[10] as String?,
+      types: (fields[11] as List?)?.cast<SmsType>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, SenderModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -802,7 +861,17 @@ class SenderModelAdapter extends TypeAdapter<SenderModel> {
       ..writeByte(5)
       ..write(obj.createdAt)
       ..writeByte(6)
-      ..write(obj.userId);
+      ..write(obj.userId)
+      ..writeByte(7)
+      ..write(obj.updatedAt)
+      ..writeByte(8)
+      ..write(obj.companyId)
+      ..writeByte(9)
+      ..write(obj.companyTypeId)
+      ..writeByte(10)
+      ..write(obj.example)
+      ..writeByte(11)
+      ..write(obj.types);
   }
 
   @override
@@ -878,16 +947,19 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
       credit: (fields[5] as num).toInt(),
       price: fields[6] == null ? 0 : (fields[6] as num).toInt(),
       createdAt: fields[7] as DateTime,
+      updatedAt: fields[11] as DateTime?,
       userId: fields[8] as String,
-      campainId: fields[9] as String?,
+      campaignId: fields[12] as String?,
       offerId: fields[10] as String?,
+      companyId: fields[13] as String?,
+      period: fields[14] as TransactionPeriod?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TransactionModel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(14)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -906,10 +978,16 @@ class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
       ..write(obj.createdAt)
       ..writeByte(8)
       ..write(obj.userId)
-      ..writeByte(9)
-      ..write(obj.campainId)
       ..writeByte(10)
-      ..write(obj.offerId);
+      ..write(obj.offerId)
+      ..writeByte(11)
+      ..write(obj.updatedAt)
+      ..writeByte(12)
+      ..write(obj.campaignId)
+      ..writeByte(13)
+      ..write(obj.companyId)
+      ..writeByte(14)
+      ..write(obj.period);
   }
 
   @override
@@ -1219,6 +1297,8 @@ class PaymentMethodAdapter extends TypeAdapter<PaymentMethod> {
         return PaymentMethod.builtIn;
       case 6:
         return PaymentMethod.otp;
+      case 7:
+        return PaymentMethod.waveCi;
       default:
         return PaymentMethod.omCi;
     }
@@ -1241,6 +1321,8 @@ class PaymentMethodAdapter extends TypeAdapter<PaymentMethod> {
         writer.writeByte(5);
       case PaymentMethod.otp:
         writer.writeByte(6);
+      case PaymentMethod.waveCi:
+        writer.writeByte(7);
     }
   }
 
@@ -1390,6 +1472,943 @@ class SenderStatusAdapter extends TypeAdapter<SenderStatus> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is SenderStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class OTPModeAdapter extends TypeAdapter<OTPMode> {
+  @override
+  final typeId = 39;
+
+  @override
+  OTPMode read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return OTPMode.numeric;
+      case 1:
+        return OTPMode.alphabet;
+      case 2:
+        return OTPMode.alphaNumeric;
+      default:
+        return OTPMode.numeric;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, OTPMode obj) {
+    switch (obj) {
+      case OTPMode.numeric:
+        writer.writeByte(0);
+      case OTPMode.alphabet:
+        writer.writeByte(1);
+      case OTPMode.alphaNumeric:
+        writer.writeByte(2);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is OTPModeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class DeviceTypeAdapter extends TypeAdapter<DeviceType> {
+  @override
+  final typeId = 40;
+
+  @override
+  DeviceType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return DeviceType.android;
+      case 1:
+        return DeviceType.ios;
+      case 2:
+        return DeviceType.web;
+      default:
+        return DeviceType.android;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, DeviceType obj) {
+    switch (obj) {
+      case DeviceType.android:
+        writer.writeByte(0);
+      case DeviceType.ios:
+        writer.writeByte(1);
+      case DeviceType.web:
+        writer.writeByte(2);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DeviceTypeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class SmsTypeAdapter extends TypeAdapter<SmsType> {
+  @override
+  final typeId = 41;
+
+  @override
+  SmsType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return SmsType.promotional;
+      case 1:
+        return SmsType.transactional;
+      case 2:
+        return SmsType.otp;
+      default:
+        return SmsType.promotional;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, SmsType obj) {
+    switch (obj) {
+      case SmsType.promotional:
+        writer.writeByte(0);
+      case SmsType.transactional:
+        writer.writeByte(1);
+      case SmsType.otp:
+        writer.writeByte(2);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SmsTypeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class TransactionPeriodAdapter extends TypeAdapter<TransactionPeriod> {
+  @override
+  final typeId = 42;
+
+  @override
+  TransactionPeriod read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return TransactionPeriod.year;
+      case 1:
+        return TransactionPeriod.month;
+      case 2:
+        return TransactionPeriod.week;
+      case 3:
+        return TransactionPeriod.day;
+      case 4:
+        return TransactionPeriod.none;
+      default:
+        return TransactionPeriod.year;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TransactionPeriod obj) {
+    switch (obj) {
+      case TransactionPeriod.year:
+        writer.writeByte(0);
+      case TransactionPeriod.month:
+        writer.writeByte(1);
+      case TransactionPeriod.week:
+        writer.writeByte(2);
+      case TransactionPeriod.day:
+        writer.writeByte(3);
+      case TransactionPeriod.none:
+        writer.writeByte(4);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TransactionPeriodAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class VerifyIdStatusAdapter extends TypeAdapter<VerifyIdStatus> {
+  @override
+  final typeId = 43;
+
+  @override
+  VerifyIdStatus read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return VerifyIdStatus.pending;
+      case 1:
+        return VerifyIdStatus.verified;
+      case 2:
+        return VerifyIdStatus.approved;
+      case 3:
+        return VerifyIdStatus.refused;
+      default:
+        return VerifyIdStatus.pending;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, VerifyIdStatus obj) {
+    switch (obj) {
+      case VerifyIdStatus.pending:
+        writer.writeByte(0);
+      case VerifyIdStatus.verified:
+        writer.writeByte(1);
+      case VerifyIdStatus.approved:
+        writer.writeByte(2);
+      case VerifyIdStatus.refused:
+        writer.writeByte(3);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is VerifyIdStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class CompanyVerificationStatusAdapter
+    extends TypeAdapter<CompanyVerificationStatus> {
+  @override
+  final typeId = 44;
+
+  @override
+  CompanyVerificationStatus read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return CompanyVerificationStatus.pending;
+      case 1:
+        return CompanyVerificationStatus.approved;
+      case 2:
+        return CompanyVerificationStatus.refused;
+      default:
+        return CompanyVerificationStatus.pending;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, CompanyVerificationStatus obj) {
+    switch (obj) {
+      case CompanyVerificationStatus.pending:
+        writer.writeByte(0);
+      case CompanyVerificationStatus.approved:
+        writer.writeByte(1);
+      case CompanyVerificationStatus.refused:
+        writer.writeByte(2);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CompanyVerificationStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ChallengeTypeAdapter extends TypeAdapter<ChallengeType> {
+  @override
+  final typeId = 45;
+
+  @override
+  ChallengeType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return ChallengeType.weekly;
+      case 1:
+        return ChallengeType.monthly;
+      case 2:
+        return ChallengeType.special;
+      default:
+        return ChallengeType.weekly;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, ChallengeType obj) {
+    switch (obj) {
+      case ChallengeType.weekly:
+        writer.writeByte(0);
+      case ChallengeType.monthly:
+        writer.writeByte(1);
+      case ChallengeType.special:
+        writer.writeByte(2);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChallengeTypeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ChallengeStatusAdapter extends TypeAdapter<ChallengeStatus> {
+  @override
+  final typeId = 46;
+
+  @override
+  ChallengeStatus read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return ChallengeStatus.upcoming;
+      case 1:
+        return ChallengeStatus.active;
+      case 2:
+        return ChallengeStatus.ended;
+      default:
+        return ChallengeStatus.upcoming;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, ChallengeStatus obj) {
+    switch (obj) {
+      case ChallengeStatus.upcoming:
+        writer.writeByte(0);
+      case ChallengeStatus.active:
+        writer.writeByte(1);
+      case ChallengeStatus.ended:
+        writer.writeByte(2);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChallengeStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class DailyTaskCriteriaTypeAdapter extends TypeAdapter<DailyTaskCriteriaType> {
+  @override
+  final typeId = 47;
+
+  @override
+  DailyTaskCriteriaType read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return DailyTaskCriteriaType.smsSent;
+      case 1:
+        return DailyTaskCriteriaType.smsDelivered;
+      case 2:
+        return DailyTaskCriteriaType.contactsAdded;
+      case 3:
+        return DailyTaskCriteriaType.campaignsCreated;
+      case 4:
+        return DailyTaskCriteriaType.groupsCreated;
+      case 5:
+        return DailyTaskCriteriaType.appOpened;
+      case 6:
+        return DailyTaskCriteriaType.creditPurchased;
+      default:
+        return DailyTaskCriteriaType.smsSent;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, DailyTaskCriteriaType obj) {
+    switch (obj) {
+      case DailyTaskCriteriaType.smsSent:
+        writer.writeByte(0);
+      case DailyTaskCriteriaType.smsDelivered:
+        writer.writeByte(1);
+      case DailyTaskCriteriaType.contactsAdded:
+        writer.writeByte(2);
+      case DailyTaskCriteriaType.campaignsCreated:
+        writer.writeByte(3);
+      case DailyTaskCriteriaType.groupsCreated:
+        writer.writeByte(4);
+      case DailyTaskCriteriaType.appOpened:
+        writer.writeByte(5);
+      case DailyTaskCriteriaType.creditPurchased:
+        writer.writeByte(6);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DailyTaskCriteriaTypeAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class DeviceModelAdapter extends TypeAdapter<DeviceModel> {
+  @override
+  final typeId = 48;
+
+  @override
+  DeviceModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return DeviceModel(
+      id: fields[0] as String?,
+      deviceId: fields[1] as String,
+      type: fields[2] as DeviceType,
+      notificationToken: fields[3] as String?,
+      userId: fields[4] as String,
+      companyId: fields[5] as String?,
+      createdAt: fields[6] as DateTime,
+      updatedAt: fields[7] as DateTime?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, DeviceModel obj) {
+    writer
+      ..writeByte(8)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.deviceId)
+      ..writeByte(2)
+      ..write(obj.type)
+      ..writeByte(3)
+      ..write(obj.notificationToken)
+      ..writeByte(4)
+      ..write(obj.userId)
+      ..writeByte(5)
+      ..write(obj.companyId)
+      ..writeByte(6)
+      ..write(obj.createdAt)
+      ..writeByte(7)
+      ..write(obj.updatedAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DeviceModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class CompanyModelAdapter extends TypeAdapter<CompanyModel> {
+  @override
+  final typeId = 49;
+
+  @override
+  CompanyModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return CompanyModel(
+      id: fields[0] as String?,
+      name: fields[1] as String,
+      description: fields[2] as String?,
+      logo: fields[3] as String?,
+      address: fields[4] as String?,
+      city: fields[5] as String?,
+      country: fields[6] as Country?,
+      verificationStatus: fields[7] == null
+          ? CompanyVerificationStatus.pending
+          : fields[7] as CompanyVerificationStatus,
+      verificationReason: fields[8] as String?,
+      companyTypeId: fields[9] as String?,
+      ownerId: fields[10] as String,
+      createdAt: fields[11] as DateTime,
+      updatedAt: fields[12] as DateTime?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, CompanyModel obj) {
+    writer
+      ..writeByte(13)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.description)
+      ..writeByte(3)
+      ..write(obj.logo)
+      ..writeByte(4)
+      ..write(obj.address)
+      ..writeByte(5)
+      ..write(obj.city)
+      ..writeByte(6)
+      ..write(obj.country)
+      ..writeByte(7)
+      ..write(obj.verificationStatus)
+      ..writeByte(8)
+      ..write(obj.verificationReason)
+      ..writeByte(9)
+      ..write(obj.companyTypeId)
+      ..writeByte(10)
+      ..write(obj.ownerId)
+      ..writeByte(11)
+      ..write(obj.createdAt)
+      ..writeByte(12)
+      ..write(obj.updatedAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CompanyModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class VerifyIdModelAdapter extends TypeAdapter<VerifyIdModel> {
+  @override
+  final typeId = 50;
+
+  @override
+  VerifyIdModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return VerifyIdModel(
+      id: fields[0] as String?,
+      userId: fields[1] as String,
+      frontImage: fields[2] as String?,
+      backImage: fields[3] as String?,
+      status: fields[4] == null
+          ? VerifyIdStatus.pending
+          : fields[4] as VerifyIdStatus,
+      reason: fields[5] as String?,
+      createdAt: fields[6] as DateTime,
+      updatedAt: fields[7] as DateTime?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, VerifyIdModel obj) {
+    writer
+      ..writeByte(8)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.userId)
+      ..writeByte(2)
+      ..write(obj.frontImage)
+      ..writeByte(3)
+      ..write(obj.backImage)
+      ..writeByte(4)
+      ..write(obj.status)
+      ..writeByte(5)
+      ..write(obj.reason)
+      ..writeByte(6)
+      ..write(obj.createdAt)
+      ..writeByte(7)
+      ..write(obj.updatedAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is VerifyIdModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ChallengeModelAdapter extends TypeAdapter<ChallengeModel> {
+  @override
+  final typeId = 51;
+
+  @override
+  ChallengeModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ChallengeModel(
+      id: fields[0] as String?,
+      name: fields[1] as String,
+      description: fields[2] as String?,
+      type: fields[3] as ChallengeType,
+      status: fields[4] as ChallengeStatus,
+      startDate: fields[5] as DateTime,
+      endDate: fields[6] as DateTime,
+      tasks: (fields[7] as List?)?.cast<ChallengeTaskModel>(),
+      communityRewards: (fields[8] as List?)?.cast<ChallengeRewardModel>(),
+      totalCommunityXp: fields[9] == null ? 0 : (fields[9] as num).toInt(),
+      participantCount: fields[10] == null ? 0 : (fields[10] as num).toInt(),
+      isJoined: fields[11] == null ? false : fields[11] as bool,
+      userXp: fields[12] == null ? 0 : (fields[12] as num).toInt(),
+      userRank: fields[13] == null ? 0 : (fields[13] as num).toInt(),
+      createdAt: fields[14] as DateTime?,
+      updatedAt: fields[15] as DateTime?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, ChallengeModel obj) {
+    writer
+      ..writeByte(16)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.description)
+      ..writeByte(3)
+      ..write(obj.type)
+      ..writeByte(4)
+      ..write(obj.status)
+      ..writeByte(5)
+      ..write(obj.startDate)
+      ..writeByte(6)
+      ..write(obj.endDate)
+      ..writeByte(7)
+      ..write(obj.tasks)
+      ..writeByte(8)
+      ..write(obj.communityRewards)
+      ..writeByte(9)
+      ..write(obj.totalCommunityXp)
+      ..writeByte(10)
+      ..write(obj.participantCount)
+      ..writeByte(11)
+      ..write(obj.isJoined)
+      ..writeByte(12)
+      ..write(obj.userXp)
+      ..writeByte(13)
+      ..write(obj.userRank)
+      ..writeByte(14)
+      ..write(obj.createdAt)
+      ..writeByte(15)
+      ..write(obj.updatedAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChallengeModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ChallengeTaskModelAdapter extends TypeAdapter<ChallengeTaskModel> {
+  @override
+  final typeId = 52;
+
+  @override
+  ChallengeTaskModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ChallengeTaskModel(
+      taskKey: fields[0] as String,
+      name: fields[1] as String,
+      description: fields[2] as String?,
+      targetValue: (fields[3] as num).toInt(),
+      xpReward: (fields[4] as num).toInt(),
+      currentProgress: fields[5] == null ? 0 : (fields[5] as num).toInt(),
+      isClaimed: fields[6] == null ? false : fields[6] as bool,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, ChallengeTaskModel obj) {
+    writer
+      ..writeByte(7)
+      ..writeByte(0)
+      ..write(obj.taskKey)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.description)
+      ..writeByte(3)
+      ..write(obj.targetValue)
+      ..writeByte(4)
+      ..write(obj.xpReward)
+      ..writeByte(5)
+      ..write(obj.currentProgress)
+      ..writeByte(6)
+      ..write(obj.isClaimed);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChallengeTaskModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ChallengeRewardModelAdapter extends TypeAdapter<ChallengeRewardModel> {
+  @override
+  final typeId = 53;
+
+  @override
+  ChallengeRewardModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ChallengeRewardModel(
+      xpThreshold: (fields[0] as num).toInt(),
+      creditReward: (fields[1] as num).toInt(),
+      isClaimed: fields[2] == null ? false : fields[2] as bool,
+      claimedCount: fields[3] == null ? 0 : (fields[3] as num).toInt(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, ChallengeRewardModel obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.xpThreshold)
+      ..writeByte(1)
+      ..write(obj.creditReward)
+      ..writeByte(2)
+      ..write(obj.isClaimed)
+      ..writeByte(3)
+      ..write(obj.claimedCount);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChallengeRewardModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ChallengeLeaderboardEntryModelAdapter
+    extends TypeAdapter<ChallengeLeaderboardEntryModel> {
+  @override
+  final typeId = 54;
+
+  @override
+  ChallengeLeaderboardEntryModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ChallengeLeaderboardEntryModel(
+      odellId: fields[0] as String,
+      companyName: fields[1] as String?,
+      companyLogo: fields[2] as String?,
+      totalXp: (fields[3] as num).toInt(),
+      rank: (fields[4] as num).toInt(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, ChallengeLeaderboardEntryModel obj) {
+    writer
+      ..writeByte(5)
+      ..writeByte(0)
+      ..write(obj.odellId)
+      ..writeByte(1)
+      ..write(obj.companyName)
+      ..writeByte(2)
+      ..write(obj.companyLogo)
+      ..writeByte(3)
+      ..write(obj.totalXp)
+      ..writeByte(4)
+      ..write(obj.rank);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChallengeLeaderboardEntryModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class DailyTaskModelAdapter extends TypeAdapter<DailyTaskModel> {
+  @override
+  final typeId = 55;
+
+  @override
+  DailyTaskModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return DailyTaskModel(
+      id: fields[0] as String?,
+      taskKey: fields[1] as String,
+      name: fields[2] as String,
+      description: fields[3] as String?,
+      criteriaType: fields[4] as DailyTaskCriteriaType,
+      criteriaValue: (fields[5] as num).toInt(),
+      xpReward: (fields[6] as num).toInt(),
+      isActive: fields[7] == null ? true : fields[7] as bool,
+      currentProgress: fields[8] == null ? 0 : (fields[8] as num).toInt(),
+      isCompleted: fields[9] == null ? false : fields[9] as bool,
+      isClaimed: fields[10] == null ? false : fields[10] as bool,
+      completedAt: fields[11] as DateTime?,
+      createdAt: fields[12] as DateTime?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, DailyTaskModel obj) {
+    writer
+      ..writeByte(13)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.taskKey)
+      ..writeByte(2)
+      ..write(obj.name)
+      ..writeByte(3)
+      ..write(obj.description)
+      ..writeByte(4)
+      ..write(obj.criteriaType)
+      ..writeByte(5)
+      ..write(obj.criteriaValue)
+      ..writeByte(6)
+      ..write(obj.xpReward)
+      ..writeByte(7)
+      ..write(obj.isActive)
+      ..writeByte(8)
+      ..write(obj.currentProgress)
+      ..writeByte(9)
+      ..write(obj.isCompleted)
+      ..writeByte(10)
+      ..write(obj.isClaimed)
+      ..writeByte(11)
+      ..write(obj.completedAt)
+      ..writeByte(12)
+      ..write(obj.createdAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DailyTaskModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class GameProfileModelAdapter extends TypeAdapter<GameProfileModel> {
+  @override
+  final typeId = 56;
+
+  @override
+  GameProfileModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return GameProfileModel(
+      id: fields[0] as String?,
+      userId: fields[1] as String,
+      companyId: fields[2] as String?,
+      totalXp: fields[3] == null ? 0 : (fields[3] as num).toInt(),
+      level: fields[4] == null ? 1 : (fields[4] as num).toInt(),
+      currentLevelXp: fields[5] == null ? 0 : (fields[5] as num).toInt(),
+      xpToNextLevel: fields[6] == null ? 100 : (fields[6] as num).toInt(),
+      streak: fields[7] == null ? 0 : (fields[7] as num).toInt(),
+      lastActivityDate: fields[8] as DateTime?,
+      createdAt: fields[9] as DateTime?,
+      updatedAt: fields[10] as DateTime?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, GameProfileModel obj) {
+    writer
+      ..writeByte(11)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.userId)
+      ..writeByte(2)
+      ..write(obj.companyId)
+      ..writeByte(3)
+      ..write(obj.totalXp)
+      ..writeByte(4)
+      ..write(obj.level)
+      ..writeByte(5)
+      ..write(obj.currentLevelXp)
+      ..writeByte(6)
+      ..write(obj.xpToNextLevel)
+      ..writeByte(7)
+      ..write(obj.streak)
+      ..writeByte(8)
+      ..write(obj.lastActivityDate)
+      ..writeByte(9)
+      ..write(obj.createdAt)
+      ..writeByte(10)
+      ..write(obj.updatedAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GameProfileModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
