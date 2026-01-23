@@ -6,21 +6,21 @@ repository: https://github.com/freddydrodev/flutter_mon_sms_pro
 issue_tracker: https://github.com/freddydrodev/flutter_mon_sms_pro/issues
 
 environment:
-  sdk: ^3.5.4
-  flutter: ">=1.17.0"
+  sdk: ^3.10.1
+  flutter: ">=3.22.0"
 
 dependencies:
   flutter:
     sdk: flutter
   dio: ^5.8.0+1
   # hive: ^2.2.3
-  hive_ce: ^2.11.3
-  hive_ce_flutter: ^2.3.1
+  hive_ce: ^2.15.1
+  hive_ce_flutter: ^2.3.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^4.0.0
+  flutter_lints: ^6.0.0
   build_runner: ^2.6.0
   hive_ce_generator: ^1.9.3
 # For information on the generic Dart part of this file, see the
